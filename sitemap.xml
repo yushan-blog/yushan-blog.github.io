@@ -2,20 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yushan-blog.github.io/java/</loc>
+    <lastmod>2024-05-24T15:14:01+08:00</lastmod>
+  </url><url>
+    <loc>https://yushan-blog.github.io/java/basic/</loc>
+    <lastmod>2024-05-24T15:13:51+08:00</lastmod>
+  </url><url>
     <loc>https://yushan-blog.github.io/blog/</loc>
+  </url><url>
+    <loc>https://yushan-blog.github.io/java/thread/</loc>
+    <lastmod>2024-05-24T15:13:51+08:00</lastmod>
+  </url><url>
+    <loc>https://yushan-blog.github.io/java/jvm/</loc>
+    <lastmod>2024-05-24T15:14:01+08:00</lastmod>
+  </url><url>
+    <loc>https://yushan-blog.github.io/java/jvm/memory-region/</loc>
+    <lastmod>2024-05-24T15:14:01+08:00</lastmod>
+  </url><url>
+    <loc>https://yushan-blog.github.io/java/third/one/</loc>
+    <lastmod>2024-05-24T15:14:01+08:00</lastmod>
+  </url><url>
+    <loc>https://yushan-blog.github.io/java/thread/basic/</loc>
     <lastmod>2024-05-24T15:14:01+08:00</lastmod>
   </url><url>
     <loc>https://yushan-blog.github.io/</loc>
     <lastmod>2024-05-24T15:14:01+08:00</lastmod>
   </url><url>
-    <loc>https://yushan-blog.github.io/blog/third/one/</loc>
+    <loc>https://yushan-blog.github.io/java/basic/basicknowledge/</loc>
     <lastmod>2024-05-24T15:14:01+08:00</lastmod>
   </url><url>
-    <loc>https://yushan-blog.github.io/blog/%E5%9F%BA%E7%A1%80/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
+    <loc>https://yushan-blog.github.io/java/thread/pool/</loc>
     <lastmod>2024-05-24T15:14:01+08:00</lastmod>
   </url><url>
-    <loc>https://yushan-blog.github.io/blog/%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2024-05-24T15:13:51+08:00</lastmod>
+    <loc>https://yushan-blog.github.io/java/basic/collection/</loc>
+    <lastmod>2024-05-24T15:14:01+08:00</lastmod>
   </url><url>
     <loc>https://yushan-blog.github.io/guide/</loc>
     <lastmod>2024-05-24T14:27:45+08:00</lastmod>

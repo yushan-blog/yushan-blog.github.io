@@ -1,0 +1,156 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>yushan-blog – JVM</title>
+    <link>https://yushan-blog.github.io/java/jvm/</link>
+    <description>Recent content in JVM on yushan-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 May 2024 15:14:01 +0800</lastBuildDate>
+    
+	  <atom:link href="https://yushan-blog.github.io/java/jvm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Java 内存区域</title>
+      <link>https://yushan-blog.github.io/java/jvm/memory-region/</link>
+      <pubDate>Fri, 24 May 2024 15:14:01 +0800</pubDate>
+      
+      <guid>https://yushan-blog.github.io/java/jvm/memory-region/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Java内存区域&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;java内存区域&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#java%e5%86%85%e5%ad%98%e5%8c%ba%e5%9f%9f&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;内存区域图&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;内存区域图&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%86%85%e5%ad%98%e5%8c%ba%e5%9f%9f%e5%9b%be&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;jdk1.8以前：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;jdk1.7%e5%8f%8a%e4%b9%8b%e5%89%8d.png&#34; alt=&#34;jdk1.7及之前.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;jdk1.8及以后：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;jdk1.8%e4%b9%8b%e5%90%8e.png&#34; alt=&#34;jdk1.8之后.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;对于线程和进程的职责：&lt;/p&gt;
+&lt;p&gt;线程独有&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;程序计数器、本地方法栈、虚拟机栈&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;线程共享&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;堆区、元空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;程序计数器&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;程序计数器&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e7%a8%8b%e5%ba%8f%e8%ae%a1%e6%95%b0%e5%99%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;在计组中，PC为控制器里面的一部分，它记录的是下一个指令所在的地址，用于指令跳转&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在java中&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;记录的是&lt;code&gt;当前线程正在执行的字节码的指令地址&lt;/code&gt;，也就是行号&lt;/li&gt;
+&lt;li&gt;因为在多线程的情况下，每一个线程都会有自己的程序计数器，然后在线程切换的时候，用于恢复现场，继续执行&lt;/li&gt;
+&lt;li&gt;程序计数器是一个很小的内存空间，它仅仅记录的是一个指针&lt;/li&gt;
+&lt;li&gt;线程私有的，生命周期跟随线程&lt;/li&gt;
+&lt;li&gt;是唯一一个没有OOME的区域&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;虚拟机栈&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;虚拟机栈&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%a0%88&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;栈&lt;/code&gt;是一个先进后出的数据结构，这就符合方法的递归调用的应用，一个方法调用另一个方法，这就符合栈的特性&lt;/li&gt;
+&lt;li&gt;在java中，虚拟机栈应用在&lt;code&gt;存储方法调用使的局部变量、操作数等信息&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;异常&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;StackOverflowError&lt;/code&gt;：方法调用太深，虚拟机栈太深&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OutOfMemoryError&lt;/code&gt;：虚拟机栈申请不到内存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;stack.png&#34; alt=&#34;stack.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;局部变量表&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;局部变量表&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f%e8%a1%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;存储方法的形参、方法内的局部变量，每一个局部变量有一个索引值，用于快速访问&lt;/li&gt;
+&lt;li&gt;局部变量必须初始化才能使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;操作栈&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;操作栈&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%93%8d%e4%bd%9c%e6%a0%88&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;可以回想一下&lt;code&gt;（2-3）*4&lt;/code&gt;，这个表达式的算法该怎么设计，利用两个栈，然后再利用操作符号的优先级，进行入栈、出栈的操作。还有前缀表达式、后缀表达式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在java中&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;是字节码指令执行过程的临时存储&lt;/li&gt;
+&lt;li&gt;由于局部变量表存储的是变量，而操作栈就可以动态的处理变量，进行一个中转站的使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;动态链接&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;动态链接&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%8a%a8%e6%80%81%e9%93%be%e6%8e%a5&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;回想多态特性的运行时多态，方法的具体调用要到运行期间也能确定&lt;/li&gt;
+&lt;li&gt;这个动态链接存储的是量池里的该方法的引用，支持调用过程中的动态链接。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;方法返回地址&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;方法返回地址&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%96%b9%e6%b3%95%e8%bf%94%e5%9b%9e%e5%9c%b0%e5%9d%80&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;要保证每一个方法执行完之后应该返回到正确的位置，接着上一个方法的执行。&lt;/li&gt;
+&lt;li&gt;此时的操作就是弹出当前栈顶的栈帧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;本地方法栈&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;本地方法栈&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%9c%ac%e5%9c%b0%e6%96%b9%e6%b3%95%e6%a0%88&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;和虚拟机栈类似，不过本地方法栈记录的是&lt;code&gt;native&lt;/code&gt;方法的信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;native方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用于在jvm上调用操作系统层面的方法，由c++/c语言编写的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;堆区（heap）&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;堆区heap&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%a0%86%e5%8c%baheap&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;在该区域中，主要用来存放&lt;code&gt;对象实例&lt;/code&gt;，也是垃圾收集器的主要工作区域。&lt;/p&gt;
+&lt;p&gt;分代回收算法，越老的区，垃圾回收频率越低（使用次数晋升）堆区划分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新生代&lt;/li&gt;
+&lt;li&gt;老年代&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;逃逸分析&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果某些方法中的对象引用没有被返回（return）或者未被外面使用（也就是未逃逸出去），那么对象可以直接在栈上分配内存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;字符串常量池&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;字符串常量池&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%b8%b8%e9%87%8f%e6%b1%a0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;因为在程序中字符串的使用占大量，所以单独开辟一个区域用于快速访问内存中字符串变量的信息。&lt;/li&gt;
+&lt;li&gt;字符串常量池可以看作是一个map，其中value用于映射堆区中的地址&lt;/li&gt;
+&lt;li&gt;它的实现是一个stringtable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;历史&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;jdk1.7以前，是在永久代中&lt;/li&gt;
+&lt;li&gt;jdk1.7及以后，移动到堆区中了&lt;/li&gt;
+&lt;li&gt;为什么：在永久代中垃圾回收效率低，没有堆区GC效率高&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;方法区&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;方法区&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%96%b9%e6%b3%95%e5%8c%ba&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;方法区是一个概念，它是一个逻辑区域，在运行时，需要读取各种类的信息，如字段信息、方法信息、常量、静态变量等等，方法区就是把这些信息划分出来的一个单独区域。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;永久代、元空间&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它俩是方法区的实现方式&lt;/li&gt;
+&lt;li&gt;永久代是在jvm运行时内存区域，然后容易OOM&lt;/li&gt;
+&lt;li&gt;元空间是在本地内存上的实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;运行时常量池&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;运行时常量池&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e8%bf%90%e8%a1%8c%e6%97%b6%e5%b8%b8%e9%87%8f%e6%b1%a0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;用来存储class文件中的各种&lt;code&gt;字面量&lt;/code&gt;和&lt;code&gt;符号引用&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;它相当于是class文件常量池在内存中的映射&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;字面量：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;是在源代码直接出现的值，可以是数字、字符&lt;/li&gt;
+&lt;li&gt;如  int a=12;   String s=&amp;ldquo;abc&amp;rdquo;;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;class文件常量池&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常量池，名字没什么大不了，池没什么大不了&lt;/li&gt;
+&lt;li&gt;这个东西就是编译器编译.java文件时，生成的.class文件，这个文件可以看作一个数据结构，存放类的信息，代码的信息，常量的信息等等。这些东西能够在编译器就能够确定，就先单独存储起来，以便快速的访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;符号引用和直接引用&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;符号引用&lt;/p&gt;
+&lt;p&gt;直接引用&lt;/p&gt;
+&lt;hr&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

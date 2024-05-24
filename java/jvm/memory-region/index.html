@@ -11,37 +11,93 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
 
-  <title>Use – yushan-blog</title>
-  <meta name="description" content="安装apt install hugo
-使用流程注：命令要在站点根目录下运行
-发布站点 hugo new site blog 安装主题 从git中寻找，clone到本地站点中的themes文件夹中 创建内容 hugo new guide/hugo/index.md " />
+  <title>Java 内存区域 – yushan-blog</title>
+  <meta name="description" content="Java内存区域 内存区域图 jdk1.8以前：
+jdk1.8及以后：
+对于线程和进程的职责：
+线程独有
+程序计数器、本地方法栈、虚拟机栈 线程共享
+堆区、元空间 程序计数器 在计组中，PC为控制器里面的一部分，它记录的是下一个指令所在的地址，用于指令跳转 在java中
+记录的是当前线程正在执行的字节码的指令地址，也就是行号 因为在多线程的情况下，每一个线程都会有自己的程序计数器，然后在线程切换的时候，用于恢复现场，继续执行 程序计数器是一个很小的内存空间，它仅仅记录的是一个指针 线程私有的，生命周期跟随线程 是唯一一个没有OOME的区域 虚拟机栈 栈是一个先进后出的数据结构，这就符合方法的递归调用的应用，一个方法调用另一个方法，这就符合栈的特性 在java中，虚拟机栈应用在存储方法调用使的局部变量、操作数等信息 异常
+StackOverflowError：方法调用太深，虚拟机栈太深 OutOfMemoryError：虚拟机栈申请不到内存 如图：
+局部变量表 存储方法的形参、方法内的局部变量，每一个局部变量有一个索引值，用于快速访问 局部变量必须初始化才能使用 操作栈 可以回想一下（2-3）*4，这个表达式的算法该怎么设计，利用两个栈，然后再利用操作符号的优先级，进行入栈、出栈的操作。还有前缀表达式、后缀表达式。 在java中
+是字节码指令执行过程的临时存储 由于局部变量表存储的是变量，而操作栈就可以动态的处理变量，进行一个中转站的使用 动态链接 回想多态特性的运行时多态，方法的具体调用要到运行期间也能确定 这个动态链接存储的是量池里的该方法的引用，支持调用过程中的动态链接。 方法返回地址 要保证每一个方法执行完之后应该返回到正确的位置，接着上一个方法的执行。 此时的操作就是弹出当前栈顶的栈帧 本地方法栈 和虚拟机栈类似，不过本地方法栈记录的是native方法的信息 native方法：
+用于在jvm上调用操作系统层面的方法，由c&#43;&#43;/c语言编写的 堆区（heap） 在该区域中，主要用来存放对象实例，也是垃圾收集器的主要工作区域。
+分代回收算法，越老的区，垃圾回收频率越低（使用次数晋升）堆区划分：
+新生代 老年代 逃逸分析
+如果某些方法中的对象引用没有被返回（return）或者未被外面使用（也就是未逃逸出去），那么对象可以直接在栈上分配内存 字符串常量池 因为在程序中字符串的使用占大量，所以单独开辟一个区域用于快速访问内存中字符串变量的信息。 字符串常量池可以看作是一个map，其中value用于映射堆区中的地址 它的实现是一个stringtable 历史
+jdk1.7以前，是在永久代中 jdk1.7及以后，移动到堆区中了 为什么：在永久代中垃圾回收效率低，没有堆区GC效率高 方法区 方法区是一个概念，它是一个逻辑区域，在运行时，需要读取各种类的信息，如字段信息、方法信息、常量、静态变量等等，方法区就是把这些信息划分出来的一个单独区域。 永久代、元空间
+它俩是方法区的实现方式 永久代是在jvm运行时内存区域，然后容易OOM 元空间是在本地内存上的实现 运行时常量池 用来存储class文件中的各种字面量和符号引用 它相当于是class文件常量池在内存中的映射 字面量：
+是在源代码直接出现的值，可以是数字、字符 如 int a=12; String s=“abc”; class文件常量池" />
 
   
-    <link rel="canonical" href="https://yushan-blog.github.io/guide/hugo/use/" itemprop="url" />
+    <link rel="canonical" href="https://yushan-blog.github.io/java/jvm/memory-region/" itemprop="url" />
   
 
   
 
-<meta property="og:title" content="Use" />
-<meta property="og:description" content="安装apt install hugo
-使用流程注：命令要在站点根目录下运行
-发布站点 hugo new site blog 安装主题 从git中寻找，clone到本地站点中的themes文件夹中 创建内容 hugo new guide/hugo/index.md " />
+<meta property="og:title" content="Java 内存区域" />
+<meta property="og:description" content="Java内存区域 内存区域图 jdk1.8以前：
+jdk1.8及以后：
+对于线程和进程的职责：
+线程独有
+程序计数器、本地方法栈、虚拟机栈 线程共享
+堆区、元空间 程序计数器 在计组中，PC为控制器里面的一部分，它记录的是下一个指令所在的地址，用于指令跳转 在java中
+记录的是当前线程正在执行的字节码的指令地址，也就是行号 因为在多线程的情况下，每一个线程都会有自己的程序计数器，然后在线程切换的时候，用于恢复现场，继续执行 程序计数器是一个很小的内存空间，它仅仅记录的是一个指针 线程私有的，生命周期跟随线程 是唯一一个没有OOME的区域 虚拟机栈 栈是一个先进后出的数据结构，这就符合方法的递归调用的应用，一个方法调用另一个方法，这就符合栈的特性 在java中，虚拟机栈应用在存储方法调用使的局部变量、操作数等信息 异常
+StackOverflowError：方法调用太深，虚拟机栈太深 OutOfMemoryError：虚拟机栈申请不到内存 如图：
+局部变量表 存储方法的形参、方法内的局部变量，每一个局部变量有一个索引值，用于快速访问 局部变量必须初始化才能使用 操作栈 可以回想一下（2-3）*4，这个表达式的算法该怎么设计，利用两个栈，然后再利用操作符号的优先级，进行入栈、出栈的操作。还有前缀表达式、后缀表达式。 在java中
+是字节码指令执行过程的临时存储 由于局部变量表存储的是变量，而操作栈就可以动态的处理变量，进行一个中转站的使用 动态链接 回想多态特性的运行时多态，方法的具体调用要到运行期间也能确定 这个动态链接存储的是量池里的该方法的引用，支持调用过程中的动态链接。 方法返回地址 要保证每一个方法执行完之后应该返回到正确的位置，接着上一个方法的执行。 此时的操作就是弹出当前栈顶的栈帧 本地方法栈 和虚拟机栈类似，不过本地方法栈记录的是native方法的信息 native方法：
+用于在jvm上调用操作系统层面的方法，由c&#43;&#43;/c语言编写的 堆区（heap） 在该区域中，主要用来存放对象实例，也是垃圾收集器的主要工作区域。
+分代回收算法，越老的区，垃圾回收频率越低（使用次数晋升）堆区划分：
+新生代 老年代 逃逸分析
+如果某些方法中的对象引用没有被返回（return）或者未被外面使用（也就是未逃逸出去），那么对象可以直接在栈上分配内存 字符串常量池 因为在程序中字符串的使用占大量，所以单独开辟一个区域用于快速访问内存中字符串变量的信息。 字符串常量池可以看作是一个map，其中value用于映射堆区中的地址 它的实现是一个stringtable 历史
+jdk1.7以前，是在永久代中 jdk1.7及以后，移动到堆区中了 为什么：在永久代中垃圾回收效率低，没有堆区GC效率高 方法区 方法区是一个概念，它是一个逻辑区域，在运行时，需要读取各种类的信息，如字段信息、方法信息、常量、静态变量等等，方法区就是把这些信息划分出来的一个单独区域。 永久代、元空间
+它俩是方法区的实现方式 永久代是在jvm运行时内存区域，然后容易OOM 元空间是在本地内存上的实现 运行时常量池 用来存储class文件中的各种字面量和符号引用 它相当于是class文件常量池在内存中的映射 字面量：
+是在源代码直接出现的值，可以是数字、字符 如 int a=12; String s=&ldquo;abc&rdquo;; class文件常量池" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yushan-blog.github.io/guide/hugo/use/" /><meta property="article:section" content="guide" />
-<meta property="article:published_time" content="2024-05-24T14:27:45+08:00" />
-<meta property="article:modified_time" content="2024-05-24T14:27:45+08:00" />
+<meta property="og:url" content="https://yushan-blog.github.io/java/jvm/memory-region/" /><meta property="article:section" content="java" />
+<meta property="article:published_time" content="2024-05-24T15:14:01+08:00" />
+<meta property="article:modified_time" content="2024-05-24T15:14:01+08:00" />
 
-  <meta itemprop="name" content="Use">
-<meta itemprop="description" content="安装apt install hugo
-使用流程注：命令要在站点根目录下运行
-发布站点 hugo new site blog 安装主题 从git中寻找，clone到本地站点中的themes文件夹中 创建内容 hugo new guide/hugo/index.md "><meta itemprop="datePublished" content="2024-05-24T14:27:45+08:00" />
-<meta itemprop="dateModified" content="2024-05-24T14:27:45+08:00" />
-<meta itemprop="wordCount" content="15">
+  <meta itemprop="name" content="Java 内存区域">
+<meta itemprop="description" content="Java内存区域 内存区域图 jdk1.8以前：
+jdk1.8及以后：
+对于线程和进程的职责：
+线程独有
+程序计数器、本地方法栈、虚拟机栈 线程共享
+堆区、元空间 程序计数器 在计组中，PC为控制器里面的一部分，它记录的是下一个指令所在的地址，用于指令跳转 在java中
+记录的是当前线程正在执行的字节码的指令地址，也就是行号 因为在多线程的情况下，每一个线程都会有自己的程序计数器，然后在线程切换的时候，用于恢复现场，继续执行 程序计数器是一个很小的内存空间，它仅仅记录的是一个指针 线程私有的，生命周期跟随线程 是唯一一个没有OOME的区域 虚拟机栈 栈是一个先进后出的数据结构，这就符合方法的递归调用的应用，一个方法调用另一个方法，这就符合栈的特性 在java中，虚拟机栈应用在存储方法调用使的局部变量、操作数等信息 异常
+StackOverflowError：方法调用太深，虚拟机栈太深 OutOfMemoryError：虚拟机栈申请不到内存 如图：
+局部变量表 存储方法的形参、方法内的局部变量，每一个局部变量有一个索引值，用于快速访问 局部变量必须初始化才能使用 操作栈 可以回想一下（2-3）*4，这个表达式的算法该怎么设计，利用两个栈，然后再利用操作符号的优先级，进行入栈、出栈的操作。还有前缀表达式、后缀表达式。 在java中
+是字节码指令执行过程的临时存储 由于局部变量表存储的是变量，而操作栈就可以动态的处理变量，进行一个中转站的使用 动态链接 回想多态特性的运行时多态，方法的具体调用要到运行期间也能确定 这个动态链接存储的是量池里的该方法的引用，支持调用过程中的动态链接。 方法返回地址 要保证每一个方法执行完之后应该返回到正确的位置，接着上一个方法的执行。 此时的操作就是弹出当前栈顶的栈帧 本地方法栈 和虚拟机栈类似，不过本地方法栈记录的是native方法的信息 native方法：
+用于在jvm上调用操作系统层面的方法，由c&#43;&#43;/c语言编写的 堆区（heap） 在该区域中，主要用来存放对象实例，也是垃圾收集器的主要工作区域。
+分代回收算法，越老的区，垃圾回收频率越低（使用次数晋升）堆区划分：
+新生代 老年代 逃逸分析
+如果某些方法中的对象引用没有被返回（return）或者未被外面使用（也就是未逃逸出去），那么对象可以直接在栈上分配内存 字符串常量池 因为在程序中字符串的使用占大量，所以单独开辟一个区域用于快速访问内存中字符串变量的信息。 字符串常量池可以看作是一个map，其中value用于映射堆区中的地址 它的实现是一个stringtable 历史
+jdk1.7以前，是在永久代中 jdk1.7及以后，移动到堆区中了 为什么：在永久代中垃圾回收效率低，没有堆区GC效率高 方法区 方法区是一个概念，它是一个逻辑区域，在运行时，需要读取各种类的信息，如字段信息、方法信息、常量、静态变量等等，方法区就是把这些信息划分出来的一个单独区域。 永久代、元空间
+它俩是方法区的实现方式 永久代是在jvm运行时内存区域，然后容易OOM 元空间是在本地内存上的实现 运行时常量池 用来存储class文件中的各种字面量和符号引用 它相当于是class文件常量池在内存中的映射 字面量：
+是在源代码直接出现的值，可以是数字、字符 如 int a=12; String s=&ldquo;abc&rdquo;; class文件常量池"><meta itemprop="datePublished" content="2024-05-24T15:14:01+08:00" />
+<meta itemprop="dateModified" content="2024-05-24T15:14:01+08:00" />
+<meta itemprop="wordCount" content="79">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Use"/>
-<meta name="twitter:description" content="安装apt install hugo
-使用流程注：命令要在站点根目录下运行
-发布站点 hugo new site blog 安装主题 从git中寻找，clone到本地站点中的themes文件夹中 创建内容 hugo new guide/hugo/index.md "/>
+<meta name="twitter:title" content="Java 内存区域"/>
+<meta name="twitter:description" content="Java内存区域 内存区域图 jdk1.8以前：
+jdk1.8及以后：
+对于线程和进程的职责：
+线程独有
+程序计数器、本地方法栈、虚拟机栈 线程共享
+堆区、元空间 程序计数器 在计组中，PC为控制器里面的一部分，它记录的是下一个指令所在的地址，用于指令跳转 在java中
+记录的是当前线程正在执行的字节码的指令地址，也就是行号 因为在多线程的情况下，每一个线程都会有自己的程序计数器，然后在线程切换的时候，用于恢复现场，继续执行 程序计数器是一个很小的内存空间，它仅仅记录的是一个指针 线程私有的，生命周期跟随线程 是唯一一个没有OOME的区域 虚拟机栈 栈是一个先进后出的数据结构，这就符合方法的递归调用的应用，一个方法调用另一个方法，这就符合栈的特性 在java中，虚拟机栈应用在存储方法调用使的局部变量、操作数等信息 异常
+StackOverflowError：方法调用太深，虚拟机栈太深 OutOfMemoryError：虚拟机栈申请不到内存 如图：
+局部变量表 存储方法的形参、方法内的局部变量，每一个局部变量有一个索引值，用于快速访问 局部变量必须初始化才能使用 操作栈 可以回想一下（2-3）*4，这个表达式的算法该怎么设计，利用两个栈，然后再利用操作符号的优先级，进行入栈、出栈的操作。还有前缀表达式、后缀表达式。 在java中
+是字节码指令执行过程的临时存储 由于局部变量表存储的是变量，而操作栈就可以动态的处理变量，进行一个中转站的使用 动态链接 回想多态特性的运行时多态，方法的具体调用要到运行期间也能确定 这个动态链接存储的是量池里的该方法的引用，支持调用过程中的动态链接。 方法返回地址 要保证每一个方法执行完之后应该返回到正确的位置，接着上一个方法的执行。 此时的操作就是弹出当前栈顶的栈帧 本地方法栈 和虚拟机栈类似，不过本地方法栈记录的是native方法的信息 native方法：
+用于在jvm上调用操作系统层面的方法，由c&#43;&#43;/c语言编写的 堆区（heap） 在该区域中，主要用来存放对象实例，也是垃圾收集器的主要工作区域。
+分代回收算法，越老的区，垃圾回收频率越低（使用次数晋升）堆区划分：
+新生代 老年代 逃逸分析
+如果某些方法中的对象引用没有被返回（return）或者未被外面使用（也就是未逃逸出去），那么对象可以直接在栈上分配内存 字符串常量池 因为在程序中字符串的使用占大量，所以单独开辟一个区域用于快速访问内存中字符串变量的信息。 字符串常量池可以看作是一个map，其中value用于映射堆区中的地址 它的实现是一个stringtable 历史
+jdk1.7以前，是在永久代中 jdk1.7及以后，移动到堆区中了 为什么：在永久代中垃圾回收效率低，没有堆区GC效率高 方法区 方法区是一个概念，它是一个逻辑区域，在运行时，需要读取各种类的信息，如字段信息、方法信息、常量、静态变量等等，方法区就是把这些信息划分出来的一个单独区域。 永久代、元空间
+它俩是方法区的实现方式 永久代是在jvm运行时内存区域，然后容易OOM 元空间是在本地内存上的实现 运行时常量池 用来存储class文件中的各种字面量和符号引用 它相当于是class文件常量池在内存中的映射 字面量：
+是在源代码直接出现的值，可以是数字、字符 如 int a=12; String s=&ldquo;abc&rdquo;; class文件常量池"/>
 
     <link rel="preload" href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" as="style" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
     <link href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" rel="stylesheet" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
@@ -175,7 +231,7 @@
     <ul class="hx-flex hx-flex-col hx-gap-1 md:hx-hidden">
       
       
-          <li class=""><a
+          <li class="open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/java/"
@@ -237,7 +293,7 @@
               
             </li></ul>
       </div>
-            </li><li class="hx-flex hx-flex-col "><a
+            </li><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/java/jvm/"
@@ -246,13 +302,22 @@
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a>
               <div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
     href="/java/jvm/memory-region/"
     
   >Java 内存区域
     </a>
+  
+    <ul class='hx-flex hx-flex-col hx-gap-1 hx-relative before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] dark:before:hx-bg-neutral-800 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-pr-3 rtl:before:hx-right-0 ltr:hx-ml-3 rtl:hx-mr-3'><li>
+              <a
+                href="#java%e5%86%85%e5%ad%98%e5%8c%ba%e5%9f%9f"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >Java内存区域</a>
+            </li>
+          </ul>
+  
               
             </li></ul>
       </div>
@@ -273,7 +338,7 @@
     
   >Java知识
     </a></li>
-          <li class="open"><a
+          <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/"
@@ -281,16 +346,13 @@
   >Guides
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/hugo/use/"
     
   >Use
     </a>
-  
-    <ul class='hx-flex hx-flex-col hx-gap-1 hx-relative before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] dark:before:hx-bg-neutral-800 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-pr-3 rtl:before:hx-right-0 ltr:hx-ml-3 rtl:hx-mr-3'></ul>
-  
               
             </li></ul>
       </div></li>
@@ -342,7 +404,7 @@
 
     <ul class="hx-flex hx-flex-col hx-gap-1 max-md:hx-hidden">
         
-          <li class=""><a
+          <li class="open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/java/"
@@ -404,7 +466,7 @@
               
             </li></ul>
       </div>
-            </li><li class="hx-flex hx-flex-col "><a
+            </li><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/java/jvm/"
@@ -413,9 +475,9 @@
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a>
               <div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
     href="/java/jvm/memory-region/"
     
   >Java 内存区域
@@ -440,7 +502,7 @@
     
   >Java知识
     </a></li>
-          <li class="open"><a
+          <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/"
@@ -448,9 +510,9 @@
   >Guides
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/hugo/use/"
     
   >Use
@@ -519,7 +581,59 @@
 </div></div></aside>
     
 <nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
-    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">On this page</p><ul></ul><ul></ul>
+    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">On this page</p><ul>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#java%e5%86%85%e5%ad%98%e5%8c%ba%e5%9f%9f">Java内存区域
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%86%85%e5%ad%98%e5%8c%ba%e5%9f%9f%e5%9b%be">内存区域图
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e7%a8%8b%e5%ba%8f%e8%ae%a1%e6%95%b0%e5%99%a8">程序计数器
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%a0%88">虚拟机栈
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f%e8%a1%a8">局部变量表
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%93%8d%e4%bd%9c%e6%a0%88">操作栈
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%8a%a8%e6%80%81%e9%93%be%e6%8e%a5">动态链接
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%96%b9%e6%b3%95%e8%bf%94%e5%9b%9e%e5%9c%b0%e5%9d%80">方法返回地址
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%9c%ac%e5%9c%b0%e6%96%b9%e6%b3%95%e6%a0%88">本地方法栈
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%a0%86%e5%8c%baheap">堆区（heap）
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%b8%b8%e9%87%8f%e6%b1%a0">字符串常量池
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%96%b9%e6%b3%95%e5%8c%ba">方法区
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%bf%90%e8%a1%8c%e6%97%b6%e5%b8%b8%e9%87%8f%e6%b1%a0">运行时常量池
+        </a>
+      </li></ul>
       <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
         <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
           <span>Scroll to top</span>
@@ -536,20 +650,139 @@
       <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
         <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
       <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
-        <a href="https://yushan-blog.github.io/guide/">Guides</a>
-      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">Use</div>
+        <a href="https://yushan-blog.github.io/java/">Java</a>
+      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
+        <a href="https://yushan-blog.github.io/java/jvm/">JVM</a>
+      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">Java 内存区域</div>
 </div>
 
         <div class="content">
-          <h1>Use</h1>
-          <h1>安装</h1><p>apt install hugo</p>
-<h1>使用流程</h1><p>注：命令要在站点根目录下运行</p>
-<ol>
-<li>发布站点 hugo new site blog</li>
-<li>安装主题
-从git中寻找，clone到本地站点中的themes文件夹中</li>
-<li>创建内容 hugo new guide/hugo/index.md</li>
-</ol>
+          <h1>Java 内存区域</h1>
+          <h2>Java内存区域<span class="hx-absolute -hx-mt-20" id="java内存区域"></span>
+    <a href="#java%e5%86%85%e5%ad%98%e5%8c%ba%e5%9f%9f" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>内存区域图<span class="hx-absolute -hx-mt-20" id="内存区域图"></span>
+    <a href="#%e5%86%85%e5%ad%98%e5%8c%ba%e5%9f%9f%e5%9b%be" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>jdk1.8以前：</p>
+<p><img src="jdk1.7%e5%8f%8a%e4%b9%8b%e5%89%8d.png" alt="jdk1.7及之前.png" loading="lazy" /></p>
+<p>jdk1.8及以后：</p>
+<p><img src="jdk1.8%e4%b9%8b%e5%90%8e.png" alt="jdk1.8之后.png" loading="lazy" /></p>
+<p>对于线程和进程的职责：</p>
+<p>线程独有</p>
+<ul>
+<li>程序计数器、本地方法栈、虚拟机栈</li>
+</ul>
+<p>线程共享</p>
+<ul>
+<li>堆区、元空间</li>
+</ul>
+<h3>程序计数器<span class="hx-absolute -hx-mt-20" id="程序计数器"></span>
+    <a href="#%e7%a8%8b%e5%ba%8f%e8%ae%a1%e6%95%b0%e5%99%a8" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
+<li>在计组中，PC为控制器里面的一部分，它记录的是下一个指令所在的地址，用于指令跳转</li>
+</ul>
+<p>在java中</p>
+<ul>
+<li>记录的是<code>当前线程正在执行的字节码的指令地址</code>，也就是行号</li>
+<li>因为在多线程的情况下，每一个线程都会有自己的程序计数器，然后在线程切换的时候，用于恢复现场，继续执行</li>
+<li>程序计数器是一个很小的内存空间，它仅仅记录的是一个指针</li>
+<li>线程私有的，生命周期跟随线程</li>
+<li>是唯一一个没有OOME的区域</li>
+</ul>
+<h3>虚拟机栈<span class="hx-absolute -hx-mt-20" id="虚拟机栈"></span>
+    <a href="#%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%a0%88" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
+<li><code>栈</code>是一个先进后出的数据结构，这就符合方法的递归调用的应用，一个方法调用另一个方法，这就符合栈的特性</li>
+<li>在java中，虚拟机栈应用在<code>存储方法调用使的局部变量、操作数等信息</code></li>
+</ul>
+<p>异常</p>
+<ul>
+<li><code>StackOverflowError</code>：方法调用太深，虚拟机栈太深</li>
+<li><code>OutOfMemoryError</code>：虚拟机栈申请不到内存</li>
+</ul>
+<p>如图：</p>
+<p><img src="stack.png" alt="stack.png" loading="lazy" /></p>
+<h4>局部变量表<span class="hx-absolute -hx-mt-20" id="局部变量表"></span>
+    <a href="#%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f%e8%a1%a8" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><ul>
+<li>存储方法的形参、方法内的局部变量，每一个局部变量有一个索引值，用于快速访问</li>
+<li>局部变量必须初始化才能使用</li>
+</ul>
+<h4>操作栈<span class="hx-absolute -hx-mt-20" id="操作栈"></span>
+    <a href="#%e6%93%8d%e4%bd%9c%e6%a0%88" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><ul>
+<li>可以回想一下<code>（2-3）*4</code>，这个表达式的算法该怎么设计，利用两个栈，然后再利用操作符号的优先级，进行入栈、出栈的操作。还有前缀表达式、后缀表达式。</li>
+</ul>
+<p>在java中</p>
+<ul>
+<li>是字节码指令执行过程的临时存储</li>
+<li>由于局部变量表存储的是变量，而操作栈就可以动态的处理变量，进行一个中转站的使用</li>
+</ul>
+<h4>动态链接<span class="hx-absolute -hx-mt-20" id="动态链接"></span>
+    <a href="#%e5%8a%a8%e6%80%81%e9%93%be%e6%8e%a5" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><ul>
+<li>回想多态特性的运行时多态，方法的具体调用要到运行期间也能确定</li>
+<li>这个动态链接存储的是量池里的该方法的引用，支持调用过程中的动态链接。</li>
+</ul>
+<h4>方法返回地址<span class="hx-absolute -hx-mt-20" id="方法返回地址"></span>
+    <a href="#%e6%96%b9%e6%b3%95%e8%bf%94%e5%9b%9e%e5%9c%b0%e5%9d%80" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><ul>
+<li>要保证每一个方法执行完之后应该返回到正确的位置，接着上一个方法的执行。</li>
+<li>此时的操作就是弹出当前栈顶的栈帧</li>
+</ul>
+<h3>本地方法栈<span class="hx-absolute -hx-mt-20" id="本地方法栈"></span>
+    <a href="#%e6%9c%ac%e5%9c%b0%e6%96%b9%e6%b3%95%e6%a0%88" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
+<li>和虚拟机栈类似，不过本地方法栈记录的是<code>native</code>方法的信息</li>
+</ul>
+<p>native方法：</p>
+<ul>
+<li>用于在jvm上调用操作系统层面的方法，由c++/c语言编写的</li>
+</ul>
+<h3>堆区（heap）<span class="hx-absolute -hx-mt-20" id="堆区heap"></span>
+    <a href="#%e5%a0%86%e5%8c%baheap" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>在该区域中，主要用来存放<code>对象实例</code>，也是垃圾收集器的主要工作区域。</p>
+<p>分代回收算法，越老的区，垃圾回收频率越低（使用次数晋升）堆区划分：</p>
+<ul>
+<li>新生代</li>
+<li>老年代</li>
+</ul>
+<p>逃逸分析</p>
+<ul>
+<li>如果某些方法中的对象引用没有被返回（return）或者未被外面使用（也就是未逃逸出去），那么对象可以直接在栈上分配内存</li>
+</ul>
+<h4>字符串常量池<span class="hx-absolute -hx-mt-20" id="字符串常量池"></span>
+    <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%b8%b8%e9%87%8f%e6%b1%a0" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><ul>
+<li>因为在程序中字符串的使用占大量，所以单独开辟一个区域用于快速访问内存中字符串变量的信息。</li>
+<li>字符串常量池可以看作是一个map，其中value用于映射堆区中的地址</li>
+<li>它的实现是一个stringtable</li>
+</ul>
+<p>历史</p>
+<ul>
+<li>jdk1.7以前，是在永久代中</li>
+<li>jdk1.7及以后，移动到堆区中了</li>
+<li>为什么：在永久代中垃圾回收效率低，没有堆区GC效率高</li>
+</ul>
+<h3>方法区<span class="hx-absolute -hx-mt-20" id="方法区"></span>
+    <a href="#%e6%96%b9%e6%b3%95%e5%8c%ba" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
+<li>方法区是一个概念，它是一个逻辑区域，在运行时，需要读取各种类的信息，如字段信息、方法信息、常量、静态变量等等，方法区就是把这些信息划分出来的一个单独区域。</li>
+</ul>
+<p>永久代、元空间</p>
+<ul>
+<li>它俩是方法区的实现方式</li>
+<li>永久代是在jvm运行时内存区域，然后容易OOM</li>
+<li>元空间是在本地内存上的实现</li>
+</ul>
+<h4>运行时常量池<span class="hx-absolute -hx-mt-20" id="运行时常量池"></span>
+    <a href="#%e8%bf%90%e8%a1%8c%e6%97%b6%e5%b8%b8%e9%87%8f%e6%b1%a0" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><ul>
+<li>用来存储class文件中的各种<code>字面量</code>和<code>符号引用</code></li>
+<li>它相当于是class文件常量池在内存中的映射</li>
+</ul>
+<p>字面量：</p>
+<ul>
+<li>是在源代码直接出现的值，可以是数字、字符</li>
+<li>如  int a=12;   String s=&ldquo;abc&rdquo;;</li>
+</ul>
+<p>class文件常量池</p>
+<ul>
+<li>常量池，名字没什么大不了，池没什么大不了</li>
+<li>这个东西就是编译器编译.java文件时，生成的.class文件，这个文件可以看作一个数据结构，存放类的信息，代码的信息，常量的信息等等。这些东西能够在编译器就能够确定，就先单独存储起来，以便快速的访问</li>
+</ul>
+<hr>
+<p><strong>符号引用和直接引用</strong></p>
+<p>符号引用</p>
+<p>直接引用</p>
+<hr>
 
         </div>
         <div class="hx-mt-16"></div>

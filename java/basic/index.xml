@@ -1,0 +1,583 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>yushan-blog – Java基础知识</title>
+    <link>https://yushan-blog.github.io/java/basic/</link>
+    <description>Recent content in Java基础知识 on yushan-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 May 2024 15:13:51 +0800</lastBuildDate>
+    
+	  <atom:link href="https://yushan-blog.github.io/java/basic/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>概念</title>
+      <link>https://yushan-blog.github.io/java/basic/basicknowledge/</link>
+      <pubDate>Fri, 24 May 2024 15:14:01 +0800</pubDate>
+      
+      <guid>https://yushan-blog.github.io/java/basic/basicknowledge/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;面向对象和面向过程&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;面向对象和面向过程&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e5%92%8c%e9%9d%a2%e5%90%91%e8%bf%87%e7%a8%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;面向对象 OOP：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将现实世界的实体所拥有的状态和行为封装成一个类，以面向这个实体的方式进行程序构建，在实体的主观感受操作。&lt;/li&gt;
+&lt;li&gt;通过对象来描述现实世界中的实体以及它们之间的交互关系。&lt;/li&gt;
+&lt;li&gt;状态-&amp;gt;属性&lt;/li&gt;
+&lt;li&gt;行为-&amp;gt;方法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;面向过程 PP：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;主要强调的是程序执行的流程，以函数和数据结构为基础进行编程&lt;/li&gt;
+&lt;li&gt;程序量比较大时程序难以维护&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;面向对象三大特性&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;面向对象三大特性&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e4%b8%89%e5%a4%a7%e7%89%b9%e6%80%a7&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;继承&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;继承&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e7%bb%a7%e6%89%bf&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;如果多个实体有共同的状态和行为，可以将这些共同的状态和行为提取出来，然后形成一个单独的实体，那些实体可以继承这个新的实体，达到复用的目的，而且容易维护。&lt;/li&gt;
+&lt;li&gt;阻止继承：类使用final关键字声明，之后这个类不能被继承，然后方法也自动是final方法。&lt;/li&gt;
+&lt;li&gt;继承：是实现了类之间的 is-a 关系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;封装&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;封装&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%b0%81%e8%a3%85&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;信息隐藏，形式上是将对象的数据和行为组合在一个类中，并且对使用者隐藏具体的实现细节&lt;/li&gt;
+&lt;li&gt;重要：程序只能通过对象的方法才能和对象的数据进行交互，使用者是看不见数据的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;多态&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;多态&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%a4%9a%e6%80%81&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;指一个对象有多种状态，主要分为编译时多态，运行时多态&lt;/li&gt;
+&lt;li&gt;编译时多态：方法的重载&lt;/li&gt;
+&lt;li&gt;运行时多态：程序中定义的&lt;code&gt;对象&lt;/code&gt;引用所指向的&lt;code&gt;具体类型&lt;/code&gt;在运行期间才确定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对象的方法调用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确定对象的实际类型&lt;/li&gt;
+&lt;li&gt;匹配方法&lt;/li&gt;
+&lt;li&gt;采用动态绑定/静态绑定
+&lt;ol&gt;
+&lt;li&gt;静态绑定：构造器、private、static和final方法，这些方法编译器能够明确，称为静态绑定&lt;/li&gt;
+&lt;li&gt;动态绑定：除了以上，必须采用动态绑定， 虚拟机必须调用与 a对象引用的实际类型对应的方法，如果在实际类型没有找到，必须在超类中调用，但是这个过程慢，所以虚拟机生成方法表，列出所有方法的签名和要调用的实际方法。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;调用方法，从方法表（虚拟机加载一个类时创建）中&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如下：
+Manager  继承 Employee
+当一个 manager 对象调用getName方法时，直接查表就知道该调用哪个方法&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Employee&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; String name&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; salary&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; name&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getSalary&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; salary&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;方法表大概为&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Employee
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	getName	  	&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Employee&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	getSalary 	&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Employee&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getSalary&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Manager&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; Employee&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; String id&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; name&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;getId&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; name&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;方法表大概为&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Manager
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	getName		&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Manager&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	getId		&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Manager&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getId&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	getSalary 	&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Employee&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getSalary&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h2&gt;接口和抽象类&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;接口和抽象类&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%8e%a5%e5%8f%a3%e5%92%8c%e6%8a%bd%e8%b1%a1%e7%b1%bb&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;概念上
+&lt;ul&gt;
+&lt;li&gt;接口：强调的是对象的行为，强调类应该做什么，比如一个接口里有一个跑步的行为，然后一个类实现了这个接口，那么就代表这个类具有的跑步的行为。&lt;/li&gt;
+&lt;li&gt;抽象类：强调代码复用，定义一种通用的模板，提供一些共性的状态和行为。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用上
+&lt;ul&gt;
+&lt;li&gt;接口：interface关键字，方法都是 public abstract，常量都是public static final且必须有默认值&lt;/li&gt;
+&lt;li&gt;抽象类：abstract关键字，可以有实例方法和抽象方法，抽象方法必须无实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;共同
+&lt;ul&gt;
+&lt;li&gt;都不能被实例化&lt;/li&gt;
+&lt;li&gt;都可以有default方法&lt;/li&gt;
+&lt;li&gt;都可以有抽象方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;数据类型&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;数据类型&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;byte、short、int、long、float、double 、char&lt;!-- raw HTML omitted --&gt;
+1、2、4、8、4、8 、2&lt;/p&gt;
+&lt;p&gt;boolean&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;单个boolean变量占用的是4个字节，因为在存储的时候使用的是int&lt;/li&gt;
+&lt;li&gt;boolean数组，每个元素占用1个字节，因为在存储的时候，虚拟机会转换为byte数组&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;对象的比较&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;对象的比较&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%af%b9%e8%b1%a1%e7%9a%84%e6%af%94%e8%be%83&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;heading&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#heading&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;当是基本类型的时候，比较的是值&lt;/li&gt;
+&lt;li&gt;当是引用类型的时候，比较的是引用地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;equals()&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;equals&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#equals&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;这是一个方法，默认Object的是比较引用地址&lt;/li&gt;
+&lt;li&gt;由于每一个类都默认是Object的子类，所以可以重写这个方法，自定义相等的逻辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;重写要符合的规则：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;自反性：x.equals(x)应该返回true，也就是除了null之外，自身应该与自身相等&lt;/li&gt;
+&lt;li&gt;对称性：对于x，y。x.equals(y)应该和y.equals(x)的返回值相等&lt;/li&gt;
+&lt;li&gt;传递性：对于x，y，z。x.equals(y)、y.equals(z)的返回值为true，x.equals(z)也应该为true&lt;/li&gt;
+&lt;li&gt;一致性：如果对象没有改变，那么反复调用返回值应该一样&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;重写的技巧：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先比较引用是否相等&lt;/li&gt;
+&lt;li&gt;检测是否为null，为null直接返回false&lt;/li&gt;
+&lt;li&gt;根据语义
+&lt;ol&gt;
+&lt;li&gt;如果在子类中比较语义改变了，则使用getClass()判断实际类型，实际类型相等时才进行比较。&lt;/li&gt;
+&lt;li&gt;如果不变，比如只比较名字等等，采用instanceof关键字判断是否属于相同的父类即可，这里要注意递归栈溢出的情况。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;然后在比较属性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@Override&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;equals&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Object other&lt;span style=&#34;color:#f92672&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;other&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;other&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(!(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getClass&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()==&lt;/span&gt;other&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getClass&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;())&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(!(&lt;/span&gt;other &lt;span style=&#34;color:#66d9ef&#34;&gt;instanceof&lt;/span&gt; OtherObject&lt;span style=&#34;color:#f92672&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;//比较属性
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h3&gt;hashCode()&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;hashcode&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#hashcode&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;默认的是由线程局部状态产生的随机数，而不是地址转换的，但是String重写了hashCode()，所以散列码可能会相同哦&lt;/li&gt;
+&lt;li&gt;地址转换的code需要通过VM参数设置&lt;code&gt; -XX:hashCode=4&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为什么使用：
+如数据结构Map，键值对的结构，通过一个key，来快速的确定一个value，通常用于快速查找的场景。但是这个key如何设置呢，以便快速的在数据结构中查找。比如简单的通过一个用户id，来确定一个用户，在这个时候，id就可以很快速的在数组中获得value。&lt;!-- raw HTML omitted --&gt;
+但是在复杂的情况，如何通过一个字符串来确定一个对象呢，字符串通过数组查找是实现不了的吧。所以对字符串进行散列，散列的意思就是将一个元素转换为一个整数，通过这个整数尽可能地能够代表这个元素。所以在使用Map的时候，如果使用字符串作为key，在存入的时候，将这个元素散列，就可以快速的查找value了。&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;和equals()的关系：
+散列会有问题，每个元素不可能散列到不同的整数，总会有冲突的，所以散列码hashcode相等不代表元素就相等。所以还是要采用equals来具体的判断元素是否相等。在Java Map中，都是先通过hashcode插入元素，不相等的hashcode视为不相等的元素会直接添加，如果hashcode相等，再通过equasl方法判断是否真的相等，相等就不加入了。&lt;!-- raw HTML omitted --&gt;
+而且速度还会比equals判断快，在中间加入一层hashcode的判断，可以提升性能，所以设计的优秀的散列函数是非常有必要的。&lt;/p&gt;
+&lt;h3&gt;重写之equals()和hashCode()&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;重写之equals和hashcode&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%87%8d%e5%86%99%e4%b9%8bequals%e5%92%8chashcode&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;hashCode，相同的元素的散列码应该是相等的，不相同的元素的散列码极小可能是相同的&lt;/li&gt;
+&lt;li&gt;散列码关注的是性能，更倾向于 不相等的元素应该产生不相等的散列码&lt;/li&gt;
+&lt;li&gt;重写equals()方法没有重写hashCode()，会出现相同的元素产生的散列码不同，然后添加到map中，第二次获取不到&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;String&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;string&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#string&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;构造之后不可以改变
+&lt;ul&gt;
+&lt;li&gt;因为字符数组是private修饰的，然后没有对外提供public方法改变&lt;/li&gt;
+&lt;li&gt;而且final修改String类，不可以被继承。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;每次String类型的对象操作时，都会产生一个新的String对象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;StringBuilder&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线程不安全，提供了修改字符串的操作&lt;/li&gt;
+&lt;li&gt;toString方法，返回一个String对象&lt;/li&gt;
+&lt;li&gt;修改操作是扩大字符数组的容量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;StringBuffer&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线程安全，public方法全是synchronized，也提供了修改字符串的操作&lt;/li&gt;
+&lt;li&gt;toString方法，返回一个String对象&lt;/li&gt;
+&lt;li&gt;修改操作是扩大字符数组的容量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;lsquo;+&amp;rsquo; 和 StringBuilder&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;+操作，每次都会创建一个StringBuilder对象操作append，然后返回一个String&lt;/li&gt;
+&lt;li&gt;StringBuilder不会&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>集合</title>
+      <link>https://yushan-blog.github.io/java/basic/collection/</link>
+      <pubDate>Fri, 24 May 2024 15:14:01 +0800</pubDate>
+      
+      <guid>https://yushan-blog.github.io/java/basic/collection/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;集合是存放对象的容器，用来存放&lt;code&gt;对象的引用&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;线程安全的集合类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Vector：老版本的，加了一个synchronized&lt;/li&gt;
+&lt;li&gt;HashTable：老版本的 ，加了一个synchronized&lt;/li&gt;
+&lt;li&gt;ConcurrentHashMap：并发HashMap，以前是锁住一个段，现在是锁住一个桶&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;collection.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;Set&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;set&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#set&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在java的大部分实现类，都是采用了Map，value都是一个final Object对象，key算是自己添加的值，也就是集合的值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;HashSet&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;hashset&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#hashset&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;集，存储的元素不相等的&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;无序&lt;/code&gt;，添加元素的顺序和存储的顺序是不一样的，
+&lt;ul&gt;
+&lt;li&gt;也可以保证有序，如LinkedHashSet，构建时传入一个dummy（true）作为第三个参数，会创建一个（LinkedHashMap）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;底层直接使用HashMap存储，value是一个固定的对象，key的hash判断不相等是不添加的，相等时也就是默认的替换老值。&lt;/li&gt;
+&lt;li&gt;扩容机制都是采用&lt;code&gt;HashMap&lt;/code&gt;的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;是如何保证不重复的？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;是直接利用了HashMap的putVal方法&lt;/li&gt;
+&lt;li&gt;如果两个key相同，这直接替换掉了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;LinkedHashSet&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;linkedhashset&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#linkedhashset&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;有序的集，直接继承HashSet&lt;/li&gt;
+&lt;li&gt;创建时dummy设为true，后续使用包级别的构造方法创建LinkedHashMap&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;TreeSet&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;treeset&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#treeset&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;底层使用了TreeMap&lt;/li&gt;
+&lt;li&gt;采用红黑树，保证了元素的有序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;List&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;list&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#list&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;是一个列表&lt;/li&gt;
+&lt;li&gt;就是数据结构的线性结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;ArrayList&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;arraylist&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#arraylist&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;存储数据还是 Object[]数组，返回元素时，是进行泛型类型的转换，也就是Object-&amp;gt;变为 E&lt;/li&gt;
+&lt;li&gt;支持基于下标的快速访问&lt;/li&gt;
+&lt;li&gt;插入O(1)，删除O(N)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;容量机制&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;默认为 10个元素&lt;/li&gt;
+&lt;li&gt;扩容数组长度：1.5倍，new=old*1.5&lt;/li&gt;
+&lt;li&gt;size：数组实际元素的个数，也就是实际存在的元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Array&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;array&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#array&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;是java用来存储相同类型元素，必须在使用前指定大小，通过索引机制访问元素&lt;/li&gt;
+&lt;li&gt;所以不可以扩缩容&lt;/li&gt;
+&lt;li&gt;是一种引用数据类型&lt;/li&gt;
+&lt;li&gt;如下，names、ages变量，它们是一种引用数据变量，当使用new关键字时，会在堆中创建连续的内存空间（每一个内存空间的大小，在类加载阶段就能确定），在虚拟机栈中会存储引用数据变量的具体指向地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; names&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; String&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;10&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; ages&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;10&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;User&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; users&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; User&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;10&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h4&gt;LinkedList&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;linkedlist&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#linkedlist&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;底层是 Node节点，使用链表的形式存储元素&lt;/li&gt;
+&lt;li&gt;默认是插入尾部&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;区别&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线程都不安全&lt;/li&gt;
+&lt;li&gt;ArrayList查询速度快&lt;/li&gt;
+&lt;li&gt;LinkedList插入，删除速度快&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Queue&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;queue&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#queue&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;先进先出的特性&lt;/li&gt;
+&lt;li&gt;判断队满：head=(tail+1)%size&lt;/li&gt;
+&lt;li&gt;判断队空：head=tail&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;HashMap&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;hashmap&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#hashmap&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;size：是key-value的个数&lt;/li&gt;
+&lt;li&gt;length：是Node数组的长度&lt;/li&gt;
+&lt;li&gt;初始容量：16&lt;/li&gt;
+&lt;li&gt;最大容量：2的30次方&lt;/li&gt;
+&lt;li&gt;默认加载因子：0.75 ，泊松分布确定&lt;/li&gt;
+&lt;li&gt;阈值：是扩容的时候，是size&amp;gt;threshold 。每次扩容新的threshold=新的容量newcap*loadFactor；但是指定长度时，阈值为大于容量的最小2的次幂的值，&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;添加元素的流程&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;添加元素的流程&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%b7%bb%e5%8a%a0%e5%85%83%e7%b4%a0%e7%9a%84%e6%b5%81%e7%a8%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;指定加载因子和阈值&lt;/li&gt;
+&lt;li&gt;默认Node数组长度为16&lt;/li&gt;
+&lt;li&gt;向map加入值时，先检查当前Node数组是否为空或者长度为0；&lt;/li&gt;
+&lt;li&gt;如果为空或者长度为0， 则进行Node数组的扩充&lt;/li&gt;
+&lt;li&gt;否则，进行&lt;code&gt;hash求余&lt;/code&gt;，&lt;code&gt;判断位置&lt;/code&gt;所在的Node元素是否为空，
+&lt;ol&gt;
+&lt;li&gt;如果为空，直接创建，填入。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;否则，&lt;code&gt;解决hash冲突&lt;/code&gt;，然后向&lt;code&gt;链表&lt;/code&gt;/&lt;code&gt;红黑树&lt;/code&gt;添加元素。&lt;/li&gt;
+&lt;li&gt;先判断是否是红黑树，如果是，则向红黑树添加元素。&lt;/li&gt;
+&lt;li&gt;如果是链表，则在尾部添加元素，如果链表长度大于等于 8,则需要转化红黑树。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;数组的长度扩充&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;数组的长度扩充&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%95%b0%e7%bb%84%e7%9a%84%e9%95%bf%e5%ba%a6%e6%89%a9%e5%85%85&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;如果Node数组为空、长度为0或者Map键值对的数量大于阈值，会进行扩容&lt;/li&gt;
+&lt;li&gt;Node数组的长度以2的倍数进行扩充&lt;/li&gt;
+&lt;li&gt;new=old&amp;laquo;1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; Node&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;K&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;V&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;[]&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;resize&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Node&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;K&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;V&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;[]&lt;/span&gt; oldTab &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; table&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//老的Node数组
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; oldCap &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;oldTab &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; oldTab&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//数组长度
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; oldThr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; threshold&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//老的阈值，阈值也是两倍扩容
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; newCap&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; newThr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;oldCap &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; 0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;oldCap &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; MAXIMUM_CAPACITY&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;//这一步是容量最大了，不能扩容了
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;                threshold &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Integer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;MAX_VALUE&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; oldTab&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;newCap &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; oldCap &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; MAXIMUM_CAPACITY &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; oldCap &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; DEFAULT_INITIAL_CAPACITY &lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                newThr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; oldThr &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// 双倍阈值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;//这一段都是初始化工作，这就是默认容量为16,阈值为16*0.75的原因
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;oldThr &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; 0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// initial capacity was placed in threshold
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;                newCap &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; oldThr&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;               &lt;span style=&#34;color:#75715e&#34;&gt;// zero initial threshold signifies using defaults
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;                newCap &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; DEFAULT_INITIAL_CAPACITY&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                newThr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)(&lt;/span&gt;DEFAULT_LOAD_FACTOR &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DEFAULT_INITIAL_CAPACITY&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        threshold &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; newThr&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//属性重新赋值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Node&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;K&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;V&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;[]&lt;/span&gt; newTab &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Node&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;K&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;V&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;[])&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Node&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;newCap&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;//处理值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        table &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; newTab&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;oldTab &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;//这一段就是深度遍历Node[]数组，重新赋值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;//如果没有冲突，重新利用key的hash和(新长度-1)异或运算即可
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;//有冲突，检查链表还是红黑树，之后重新赋值即可
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; newTab&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h3&gt;确定hash值&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;确定hash值&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e7%a1%ae%e5%ae%9ahash%e5%80%bc&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;HashMap的hash方法是Object的hashCode()，和hashCode的16位后缀进行异或运算。&lt;/li&gt;
+&lt;li&gt;key可以为null，hash值为0&lt;/li&gt;
+&lt;li&gt;key在Node数组的位置：i=(n-1)&amp;amp;hash&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//这个是HashMap中求hash的值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;hash&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Object key&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; h&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;key &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;h &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; key&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;hashCode&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;())&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;h &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; 16&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//这个就是putVal方法中，计算索引下标
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; hash&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Node&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;K&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;V&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tab&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;h3&gt;转化红黑树：&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;转化红黑树&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e8%bd%ac%e5%8c%96%e7%ba%a2%e9%bb%91%e6%a0%91&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;先判断当前Node结点所尾随的链表长度是否&amp;gt;=8，如果大于则进行转换操作的判断&lt;/li&gt;
+&lt;li&gt;转化：首先判断Node结点数组的长度是否小于64 。
+a. 如果小于64 ，则先进行数组扩容&lt;/li&gt;
+&lt;li&gt;只有链表长度&amp;gt;=8 ，Node数组长度&amp;gt;=64，才会转化红黑树&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;线程不安全&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;线程不安全&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e7%ba%bf%e7%a8%8b%e4%b8%8d%e5%ae%89%e5%85%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;插入时：假定A,B两个线程处理的key出现冲突，并且计算的index一样；此时，A线程时间片使用完毕，B线程进行处理，插入数据，但是A线程活动时，会替换掉B线程处理的数据。&lt;/li&gt;
+&lt;li&gt;size：检查size和增加size ，这两个操作不是原子的；最终会导致size只增加1个。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;LinkedHashMap&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;linkedhashmap&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#linkedhashmap&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;概念&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;概念&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%a6%82%e5%bf%b5&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;继承了HashMap&lt;/li&gt;
+&lt;li&gt;采用双向链表，保证插入顺序和输出`顺序的一致性&lt;/li&gt;
+&lt;li&gt;图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;linkedhashmap.png&#34; alt=&#34;linkedhashmap.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;accessOrder&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;accessorder&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#accessorder&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;这个属性决定了 每次访问某个key-value之后是否移动到链表的尾部&lt;/li&gt;
+&lt;li&gt;默认为false，在创建时可以指定&lt;/li&gt;
+&lt;li&gt;使用这个可以实现 输出顺序和访问顺序一样，链表的头部是最久未访问的元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;removeEldestEntry()&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;removeeldestentry&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#removeeldestentry&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;结合accessOrder，可以包装一个简易的LRU缓存&lt;/li&gt;
+&lt;li&gt;这个方法由afterNodeInsertion()调用，这个方法是进行&lt;code&gt;移除首节点&lt;/code&gt;的操作，由一个参数evict控制。可以在HashMap的putVal()源码中看见最后调用了这个方法，只是HashMap里的是一个空方法。由于这个LinkedHashMap没有重写put操作，所以最后是否移除首节点，就有这个方法来控制了，&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; V &lt;span style=&#34;color:#a6e22e&#34;&gt;put&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;K key&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; V value&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; putVal&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;hash&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;key&lt;span style=&#34;color:#f92672&#34;&gt;),&lt;/span&gt; key&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; value&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; evict&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;removeEldestEntry&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Map&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Entry&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;K&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;V&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; eldest&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//重写
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;removeEldestEntry&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Map&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Entry&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;K&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;V&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; eldest&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; size&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;MAX_ENTRIES&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;可以重写这个方法，返回true，就可以实现移除首节点，释放空间了&lt;/p&gt;
+&lt;h2&gt;ConcurrentHashMap&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;concurrenthashmap&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#concurrenthashmap&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;数据结构：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1.7及以前：采用Segment数组+Entry数组+链表，可以代表着并发级别，每一个Segment锁住一部分数据，可以保护并发安全性。Segment继承了可重入锁&lt;/li&gt;
+&lt;li&gt;1.8：采用Node数组+链表/红黑树，和HashMap一样。然后锁的层面采用synchronized+CAS。锁的粒度为 Node数组的节点，synchronized只锁定当前链表或红黑二叉树的首节点，也就是只对hash一样的节点加锁，粒度更低，并发量更高
+&lt;ul&gt;
+&lt;li&gt;cas操作，体现在经过hash判断节点没有值，采用CAS操作向Node数组添加值&lt;/li&gt;
+&lt;li&gt;synchronized操作，体现在判断之后，出现冲突，加锁，处理冲突，添加值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;复合操作的原子性&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当有检查操作之后还有添加操作，这两个操作不是原子的，会有线程不安全的问题&lt;/li&gt;
+&lt;li&gt;CHM提供了方法可以直接使用，不建议加锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;HashTable  过时&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;hashtable--过时&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#hashtable--%e8%bf%87%e6%97%b6&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;也是key-value结构&lt;/li&gt;
+&lt;li&gt;线程安全，所有的&lt;code&gt;公有方法&lt;/code&gt;都用 &lt;code&gt;synchronized&lt;/code&gt;关键字修饰&lt;/li&gt;
+&lt;li&gt;解决冲突：&lt;code&gt;链表&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;扩容：&lt;code&gt;2n+1&lt;/code&gt;，初始默认11
+&lt;ul&gt;
+&lt;li&gt;先确定容量：2n+1&lt;/li&gt;
+&lt;li&gt;再重构所有元素hash，然后确定新数组的index位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;添加元素
+&lt;ul&gt;
+&lt;li&gt;先判断index=hashCode()%len&lt;/li&gt;
+&lt;li&gt;遍历entry.next，查看是否有相等的，若相等则直接替换，采用的是 头插法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

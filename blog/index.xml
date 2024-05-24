@@ -1,11 +1,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>yushan-blog – Java</title>
+    <title>yushan-blog – Java知识</title>
     <link>https://yushan-blog.github.io/blog/</link>
-    <description>Recent content in Java on yushan-blog</description>
+    <description>Recent content in Java知识 on yushan-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 May 2024 15:14:01 +0800</lastBuildDate>
     
 	  <atom:link href="https://yushan-blog.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
