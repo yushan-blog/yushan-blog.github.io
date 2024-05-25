@@ -1,0 +1,19 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>宋雨山 – 开发框架</title>
+    <link>https://yushan-blog.github.io/devframe/</link>
+    <description>Recent content in 开发框架 on 宋雨山</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 May 2024 15:14:01 +0800</lastBuildDate>
+    
+	  <atom:link href="https://yushan-blog.github.io/devframe/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

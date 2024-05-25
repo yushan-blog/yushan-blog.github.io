@@ -1,0 +1,19 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>宋雨山 – MySQL</title>
+    <link>https://yushan-blog.github.io/mysql/</link>
+    <description>Recent content in MySQL on 宋雨山</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 May 2024 15:14:01 +0800</lastBuildDate>
+    
+	  <atom:link href="https://yushan-blog.github.io/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

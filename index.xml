@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>yushan-blog – 宋雨山个人笔记</title>
+    <title>宋雨山 – </title>
     <link>https://yushan-blog.github.io/</link>
-    <description>Recent content in 宋雨山个人笔记 on yushan-blog</description>
+    <description>Recent content on 宋雨山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 May 2024 15:14:01 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 24 May 2024 15:14:11 +0800</lastBuildDate>
     
 	  <atom:link href="https://yushan-blog.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,6 +13,130 @@
       
       
     
+    
+    <item>
+      <title>终端</title>
+      <link>https://yushan-blog.github.io/essay/bash/</link>
+      <pubDate>Fri, 24 May 2024 15:14:11 +0800</pubDate>
+      
+      <guid>https://yushan-blog.github.io/essay/bash/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;概念&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;概念&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%a6%82%e5%bf%b5&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;简单的概念就是linux是一个内核，然后需要一个shell来和linux内核打交道，bash就是shell的一种，其他的还有ksh,zsh,sh，和用户打交道的就是终端，它来接收用户输入的信息，传递到使用的bash里，终端比如konsole,zutty,terminator，很多……&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;终端：人机接口的工具，输入shell命令的工具，如konsole，zutty&lt;/li&gt;
+&lt;li&gt;bash：是shell的一种类型，其他的还有zsh ，sh ，dash&lt;/li&gt;
+&lt;li&gt;shell：是“壳”的意思，是在计算机内核之上套了一层，用来接收用户指令的界面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;shell&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;shell&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#shell&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;分类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;图形界面shell：如linux的ghome， kde，&lt;/li&gt;
+&lt;li&gt;命令式shell：如sh/bash/zsh/ksh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;交互式和非交互式&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;交互式和非交互式&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e4%ba%a4%e4%ba%92%e5%bc%8f%e5%92%8c%e9%9d%9e%e4%ba%a4%e4%ba%92%e5%bc%8f&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;交互式shell：是与用户交互的，等待用户输入的命令的shell，&lt;/li&gt;
+&lt;li&gt;非交互式shell：是以脚本运行的，比如编写一个&lt;code&gt;start.sh&lt;/code&gt;，就可以用bash工具运行它&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;登录式和非登录式&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;登录式和非登录式&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e7%99%bb%e5%bd%95%e5%bc%8f%e5%92%8c%e9%9d%9e%e7%99%bb%e5%bd%95%e5%bc%8f&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;这个是根据两种shell所读取的配置文件不同而区分的&lt;/li&gt;
+&lt;li&gt;登录式shell：当第一次登录linux系统时，分配的shell就是登录shell，还有在终端使用&lt;code&gt;su&lt;/code&gt;命令登录后，只能使用&lt;code&gt;logout&lt;/code&gt;命令退出的就是登录式shell，比如使用虚拟机时没有安装GUI，那个使用root提示的就是登录shell，还有ssh远程连接时，那个也是登录shell，读取文件：
+&lt;ol&gt;
+&lt;li&gt;/etc/profile&lt;/li&gt;
+&lt;li&gt;/etc/profile.d/*.sh&lt;/li&gt;
+&lt;li&gt;~/.bash_profile&lt;/li&gt;
+&lt;li&gt;~/.bashrc&lt;/li&gt;
+&lt;li&gt;/etc/bashrc&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;非登录式shell：和用户无关的shell，比如在linux系统里，使用终端打开的shell，那是非登录的，它读取的文件是不一样的。
+&lt;ol&gt;
+&lt;li&gt;~/.bashrc&lt;/li&gt;
+&lt;li&gt;/etc/bashrc&lt;/li&gt;
+&lt;li&gt;/etc/profile.d/*.sh&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;判断&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;判断&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%88%a4%e6%96%ad&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;要进行测试的话，在每个文件内添加&lt;code&gt;echo&lt;/code&gt;命令就可&lt;/li&gt;
+&lt;li&gt;判断是哪个shell，-bash是登录式shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././images/shell.png&#34; alt=&#34;shell.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;使用&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;使用&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e4%bd%bf%e7%94%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>https://yushan-blog.github.io/essay/vim/</link>
+      <pubDate>Tue, 14 May 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://yushan-blog.github.io/essay/vim/</guid>
+      <description>
+        
+        
+        &lt;h1&gt;伟人&lt;/h1&gt;&lt;p&gt;Bram Moolenaar （1961—2023.8.3），编辑器之神Vim之父&lt;/p&gt;
+&lt;p&gt;1961年——出生在荷兰莱斯镇 &lt;!-- raw HTML omitted --&gt;
+1985年——代尔夫特理工大学毕业，获得电气工程学士学位&lt;!-- raw HTML omitted --&gt;
+1988年——开发Vim&lt;!-- raw HTML omitted --&gt;
+
+    &lt;img src=&#34;.././images/BramMoolenaar.png&#34; alt=&#34;BramMoolenaar.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h1&gt;简介&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;Vim开源、免费的文本编辑器&lt;/li&gt;
+&lt;li&gt;Vim初始是根据Vi来编写的&lt;/li&gt;
+&lt;li&gt;初始版本为“Vi IMitation”，1992年，在版本1.22中改名为“Vi IMproved”&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;优点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;persistent, multi-level undo tree 持久的、多层次的undo树&lt;/li&gt;
+&lt;li&gt;extensive plugin system 广泛的插件系统&lt;/li&gt;
+&lt;li&gt;support for hundreds of programming languages and file formats 支持数百种编程语言和文件格式&lt;/li&gt;
+&lt;li&gt;powerful search and replace 强大的搜索和替换能力&lt;/li&gt;
+&lt;li&gt;integrates with many tools 集成了许多工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Vim官方网站&lt;a href=&#34;https://www.vim.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;vim.org&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;善举&lt;/h1&gt;&lt;p&gt;ICCF（International Child Care Fund）国际儿童保育基金，是一个慈善组织。Bram Moolenaar还通过Vim项目鼓励开发者对乌干达的艾滋孤儿捐赠。将网站的收入和赞助全部捐赠给这个组织，帮助乌干达的孤儿。&lt;/p&gt;
+&lt;h1&gt;结构&lt;/h1&gt;&lt;h2&gt;命令模式&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;命令模式&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%91%bd%e4%bb%a4%e6%a8%a1%e5%bc%8f&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;进入vim时，就是命令模式&lt;/li&gt;
+&lt;li&gt;可以移动光标&lt;/li&gt;
+&lt;li&gt;可以删除、复制、粘贴文本&lt;/li&gt;
+&lt;li&gt;可以撤销、反撤销&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;输入模式&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;输入模式&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e8%be%93%e5%85%a5%e6%a8%a1%e5%bc%8f&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;命令模式&lt;/code&gt;下按 &lt;code&gt;i&lt;/code&gt;或者&lt;code&gt;a&lt;/code&gt;或者&lt;code&gt;o&lt;/code&gt;即可进入该模式&lt;/li&gt;
+&lt;li&gt;在该模式中就可以输入文本了&lt;/li&gt;
+&lt;li&gt;按&lt;code&gt;Esc&lt;/code&gt;就可以回到命令模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;命令行模式&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;命令行模式&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%91%bd%e4%bb%a4%e8%a1%8c%e6%a8%a1%e5%bc%8f&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;命令模式&lt;/code&gt;下按 &lt;code&gt;:&lt;/code&gt;即可进入该模式&lt;/li&gt;
+&lt;li&gt;在模式中，有大量的命令可以输入&lt;/li&gt;
+&lt;li&gt;比如常用的保存&lt;code&gt;w&lt;/code&gt;、退出&lt;code&gt;q&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;操作&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;全文复制
+思路 第一行为gg,最后一行为G,复制为yy，结合起来，在可视令模式下输入 ggyG&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././images/vim.png&#34; alt=&#34;vim快捷键&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h1&gt;配置&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;可以使用Vbundle进行插件配置&lt;/li&gt;
+&lt;li&gt;主要是vimrc文件，可以在~/.vimrc中配置自己想要的配置&lt;/li&gt;
+&lt;li&gt;在github中，有很多vimrc，可以一键安装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;R.I.P&lt;/p&gt;
+
+      </description>
+    </item>
     
   </channel>
 </rss>

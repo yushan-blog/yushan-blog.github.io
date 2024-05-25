@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>yushan-blog – 多线程</title>
+    <title>宋雨山 – 多线程</title>
     <link>https://yushan-blog.github.io/java/thread/</link>
-    <description>Recent content in 多线程 on yushan-blog</description>
+    <description>Recent content in 多线程 on 宋雨山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 24 May 2024 15:13:51 +0800</lastBuildDate>
