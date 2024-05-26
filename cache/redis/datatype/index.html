@@ -12,12 +12,8 @@
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
 
   <title>数据类型 – 宋雨山</title>
-  <meta name="description" content="String set set key value [nx | xx] [get] [ex s | px ms | exat unix-ts | pxat unix-tms | keepttl ]
-O(1) 建立一个key并赋值value，如果该key已存在，则覆盖，并清除原来与key关联的生存时间 ex seconds：设置过期时间，单位：秒 ，expires px ms：设置过期时间，单位：毫秒 exat unix-time-seconds：时间戳格式，以UNIX时间为过期时间，单位：秒 pxat unix-time-seconds：同上，单位:毫秒 keepttl : 保留原键值对的生存时间，通过TTL命令可查看，用在该key被覆盖的情况下 get：建立key时，获取该key的旧值；如果该key以前没有值，则返回nil 返回值：
-成功：“OK” 键不存在：（nil） setrange key offset value
-O(1) 替换字符串 从偏移量开始替换新的value 偏移量在字符串尾部-&gt;追加 offset&gt;=0 返回值：
-目标key的新长度 示例：
-redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#34;Redis&#34; (integer) 11 redis&gt; get key &#34;Hello Redis&#34; msetnx key value [key value……]" />
+  <meta name="description" content="String 是Redis最基本的数据类型，特点是二进制安全，可以存储任何类型的数据，包括文本、数字、图像、序列化等，存储最大大小为512MB
+set redis&gt; set key &#34;Hello World&#34; ex 10 &#34;OK&#34; redis&gt; setrange key 6 &#34;Redis&#34; (integer) 11 redis&gt; get key &#34;Hello Redis&#34; redis&gt; mset k1 v1 k2 v2 &#34;OK&#34; redis&gt; append k1 song (integer) 6 redis&gt; get k1 &#34;v1song&#34; incr/decr redis&gt; set num 1 &#34;OK&#34; redis&gt; incr num (integer) 2 redis&gt; incrby num 10 (integer) 12 redis&gt; incrbyfloat num 0.1 &#34;12.1&#34; --- decr只能操作整数 redis&gt; decr num (integer) 1 redis&gt; decrby num 10 (integer) 0 get redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; get key &#34;Hello World&#34; redis&gt; get nonexistentkey (nil) redis&gt; getrange key 0 4 &#34;Hello&#34; strlen redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; strlen key (integer) 11 lcs 最长公共子序列，时间复杂度O(n*m)" />
 
   
     <link rel="canonical" href="https://yushan-blog.github.io/cache/redis/datatype/" itemprop="url" />
@@ -26,34 +22,22 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
   
 
 <meta property="og:title" content="数据类型" />
-<meta property="og:description" content="String set set key value [nx | xx] [get] [ex s | px ms | exat unix-ts | pxat unix-tms | keepttl ]
-O(1) 建立一个key并赋值value，如果该key已存在，则覆盖，并清除原来与key关联的生存时间 ex seconds：设置过期时间，单位：秒 ，expires px ms：设置过期时间，单位：毫秒 exat unix-time-seconds：时间戳格式，以UNIX时间为过期时间，单位：秒 pxat unix-time-seconds：同上，单位:毫秒 keepttl : 保留原键值对的生存时间，通过TTL命令可查看，用在该key被覆盖的情况下 get：建立key时，获取该key的旧值；如果该key以前没有值，则返回nil 返回值：
-成功：“OK” 键不存在：（nil） setrange key offset value
-O(1) 替换字符串 从偏移量开始替换新的value 偏移量在字符串尾部-&gt;追加 offset&gt;=0 返回值：
-目标key的新长度 示例：
-redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#34;Redis&#34; (integer) 11 redis&gt; get key &#34;Hello Redis&#34; msetnx key value [key value……]" />
+<meta property="og:description" content="String 是Redis最基本的数据类型，特点是二进制安全，可以存储任何类型的数据，包括文本、数字、图像、序列化等，存储最大大小为512MB
+set redis&gt; set key &#34;Hello World&#34; ex 10 &#34;OK&#34; redis&gt; setrange key 6 &#34;Redis&#34; (integer) 11 redis&gt; get key &#34;Hello Redis&#34; redis&gt; mset k1 v1 k2 v2 &#34;OK&#34; redis&gt; append k1 song (integer) 6 redis&gt; get k1 &#34;v1song&#34; incr/decr redis&gt; set num 1 &#34;OK&#34; redis&gt; incr num (integer) 2 redis&gt; incrby num 10 (integer) 12 redis&gt; incrbyfloat num 0.1 &#34;12.1&#34; --- decr只能操作整数 redis&gt; decr num (integer) 1 redis&gt; decrby num 10 (integer) 0 get redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; get key &#34;Hello World&#34; redis&gt; get nonexistentkey (nil) redis&gt; getrange key 0 4 &#34;Hello&#34; strlen redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; strlen key (integer) 11 lcs 最长公共子序列，时间复杂度O(n*m)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yushan-blog.github.io/cache/redis/datatype/" /><meta property="article:section" content="cache" />
 <meta property="article:published_time" content="2024-05-24T15:14:01+08:00" />
 <meta property="article:modified_time" content="2024-05-24T15:14:01+08:00" />
 
   <meta itemprop="name" content="数据类型">
-<meta itemprop="description" content="String set set key value [nx | xx] [get] [ex s | px ms | exat unix-ts | pxat unix-tms | keepttl ]
-O(1) 建立一个key并赋值value，如果该key已存在，则覆盖，并清除原来与key关联的生存时间 ex seconds：设置过期时间，单位：秒 ，expires px ms：设置过期时间，单位：毫秒 exat unix-time-seconds：时间戳格式，以UNIX时间为过期时间，单位：秒 pxat unix-time-seconds：同上，单位:毫秒 keepttl : 保留原键值对的生存时间，通过TTL命令可查看，用在该key被覆盖的情况下 get：建立key时，获取该key的旧值；如果该key以前没有值，则返回nil 返回值：
-成功：“OK” 键不存在：（nil） setrange key offset value
-O(1) 替换字符串 从偏移量开始替换新的value 偏移量在字符串尾部-&gt;追加 offset&gt;=0 返回值：
-目标key的新长度 示例：
-redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#34;Redis&#34; (integer) 11 redis&gt; get key &#34;Hello Redis&#34; msetnx key value [key value……]"><meta itemprop="datePublished" content="2024-05-24T15:14:01+08:00" />
+<meta itemprop="description" content="String 是Redis最基本的数据类型，特点是二进制安全，可以存储任何类型的数据，包括文本、数字、图像、序列化等，存储最大大小为512MB
+set redis&gt; set key &#34;Hello World&#34; ex 10 &#34;OK&#34; redis&gt; setrange key 6 &#34;Redis&#34; (integer) 11 redis&gt; get key &#34;Hello Redis&#34; redis&gt; mset k1 v1 k2 v2 &#34;OK&#34; redis&gt; append k1 song (integer) 6 redis&gt; get k1 &#34;v1song&#34; incr/decr redis&gt; set num 1 &#34;OK&#34; redis&gt; incr num (integer) 2 redis&gt; incrby num 10 (integer) 12 redis&gt; incrbyfloat num 0.1 &#34;12.1&#34; --- decr只能操作整数 redis&gt; decr num (integer) 1 redis&gt; decrby num 10 (integer) 0 get redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; get key &#34;Hello World&#34; redis&gt; get nonexistentkey (nil) redis&gt; getrange key 0 4 &#34;Hello&#34; strlen redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; strlen key (integer) 11 lcs 最长公共子序列，时间复杂度O(n*m)"><meta itemprop="datePublished" content="2024-05-24T15:14:01+08:00" />
 <meta itemprop="dateModified" content="2024-05-24T15:14:01+08:00" />
-<meta itemprop="wordCount" content="1021">
+<meta itemprop="wordCount" content="671">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="数据类型"/>
-<meta name="twitter:description" content="String set set key value [nx | xx] [get] [ex s | px ms | exat unix-ts | pxat unix-tms | keepttl ]
-O(1) 建立一个key并赋值value，如果该key已存在，则覆盖，并清除原来与key关联的生存时间 ex seconds：设置过期时间，单位：秒 ，expires px ms：设置过期时间，单位：毫秒 exat unix-time-seconds：时间戳格式，以UNIX时间为过期时间，单位：秒 pxat unix-time-seconds：同上，单位:毫秒 keepttl : 保留原键值对的生存时间，通过TTL命令可查看，用在该key被覆盖的情况下 get：建立key时，获取该key的旧值；如果该key以前没有值，则返回nil 返回值：
-成功：“OK” 键不存在：（nil） setrange key offset value
-O(1) 替换字符串 从偏移量开始替换新的value 偏移量在字符串尾部-&gt;追加 offset&gt;=0 返回值：
-目标key的新长度 示例：
-redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#34;Redis&#34; (integer) 11 redis&gt; get key &#34;Hello Redis&#34; msetnx key value [key value……]"/>
+<meta name="twitter:description" content="String 是Redis最基本的数据类型，特点是二进制安全，可以存储任何类型的数据，包括文本、数字、图像、序列化等，存储最大大小为512MB
+set redis&gt; set key &#34;Hello World&#34; ex 10 &#34;OK&#34; redis&gt; setrange key 6 &#34;Redis&#34; (integer) 11 redis&gt; get key &#34;Hello Redis&#34; redis&gt; mset k1 v1 k2 v2 &#34;OK&#34; redis&gt; append k1 song (integer) 6 redis&gt; get k1 &#34;v1song&#34; incr/decr redis&gt; set num 1 &#34;OK&#34; redis&gt; incr num (integer) 2 redis&gt; incrby num 10 (integer) 12 redis&gt; incrbyfloat num 0.1 &#34;12.1&#34; --- decr只能操作整数 redis&gt; decr num (integer) 1 redis&gt; decrby num 10 (integer) 0 get redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; get key &#34;Hello World&#34; redis&gt; get nonexistentkey (nil) redis&gt; getrange key 0 4 &#34;Hello&#34; strlen redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; strlen key (integer) 11 lcs 最长公共子序列，时间复杂度O(n*m)"/>
 
     <link rel="preload" href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" as="style" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
     <link href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" rel="stylesheet" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
@@ -116,7 +100,7 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
             <span class="hx-text-center">随笔</span>
           </a><a
             title="个人记事"
-            href="/about"
+            href="/datastruct"
             
             class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200"
           >
@@ -145,7 +129,7 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
   </div>
 </div>
 
-          <a class="hx-p-2 hx-text-current" target="_blank" rel="noreferer" href="https://github.com/imfing/hextra" title="GitHub"><svg height=24 fill="currentColor" viewBox="3 3 18 18">
+          <a class="hx-p-2 hx-text-current" target="_blank" rel="noreferer" href="https://github.com/yushan-blog/blog-hugo" title="GitHub"><svg height=24 fill="currentColor" viewBox="3 3 18 18">
   <path d="M12 3C7.0275 3 3 7.12937 3 12.2276C3 16.3109 5.57625 19.7597 9.15374 20.9824C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441C9.77249 20.3249 9.76125 19.5982 9.76125 18.8254C7.5 19.2522 6.915 18.2602 6.735 17.7412C6.63375 17.4759 6.19499 16.6569 5.8125 16.4378C5.4975 16.2647 5.0475 15.838 5.80124 15.8264C6.51 15.8149 7.01625 16.4954 7.18499 16.7723C7.99499 18.1679 9.28875 17.7758 9.80625 17.5335C9.885 16.9337 10.1212 16.53 10.38 16.2993C8.3775 16.0687 6.285 15.2728 6.285 11.7432C6.285 10.7397 6.63375 9.9092 7.20749 9.26326C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794C7.2975 6.81794 8.05125 6.57571 9.77249 7.76377C10.4925 7.55615 11.2575 7.45234 12.0225 7.45234C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377C15.9937 6.56418 16.7475 6.81794 16.7475 6.81794C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326C17.4113 9.9092 17.76 10.7281 17.76 11.7432C17.76 15.2843 15.6563 16.0687 13.6537 16.2993C13.98 16.5877 14.2613 17.1414 14.2613 18.0065C14.2613 19.2407 14.25 20.2326 14.25 20.5441C14.25 20.7863 14.4188 21.0746 14.8688 20.9824C16.6554 20.364 18.2079 19.1866 19.3078 17.6162C20.4077 16.0457 20.9995 14.1611 21 12.2276C21 7.12937 16.9725 3 12 3Z"></path>
 </svg>
 <span class="hx-sr-only">GitHub</span>
@@ -562,6 +546,13 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
               
             </li></ul>
       </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/"
+    
+  >数据结构
+    </a></li>
       <li class="[word-break:break-word] hx-mt-5 hx-mb-2 hx-px-2 hx-py-1.5 hx-text-sm hx-font-semibold hx-text-gray-900 first:hx-mt-0 dark:hx-text-gray-100">
         <span class="hx-cursor-default">More</span>
       </li>
@@ -914,6 +905,13 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
               
             </li></ul>
       </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/"
+    
+  >数据结构
+    </a></li>
         
       <li class="[word-break:break-word] hx-mt-5 hx-mb-2 hx-px-2 hx-py-1.5 hx-text-sm hx-font-semibold hx-text-gray-900 first:hx-mt-0 dark:hx-text-gray-100">
         <span class="hx-cursor-default">More</span>
@@ -959,10 +957,6 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#append">append
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
         <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#incrdecr">incr/decr
         </a>
       </li>
@@ -983,23 +977,19 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%88%97%e8%a1%a8">列表
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#lrange">lrange
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%b7%bb%e5%8a%a0">添加
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#lpushrpush">lpush/rpush
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%8e%b7%e5%8f%96">获取
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#lset">lset
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bf%ae%e6%94%b9">修改
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-8 rtl:hx-pr-8 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e7%a7%bb%e9%99%a4">移除
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#lpop">lpop
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
@@ -1011,11 +1001,7 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#smove">smove
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%88%a0%e9%99%a4">删除
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#spop">spop
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
@@ -1031,23 +1017,15 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%b7%bb%e5%8a%a0%e5%ad%97%e6%ae%b5">添加字段
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#hset">hset
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e8%8e%b7%e5%8f%96%e5%ad%97%e6%ae%b5">获取字段
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#hget">hget
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%88%a0%e9%99%a4%e5%ad%97%e6%ae%b5">删除字段
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%bf%ae%e6%94%b9%e5%ad%97%e6%ae%b5%e5%80%bc">修改字段值
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%95%a3%e5%88%97%e4%bf%a1%e6%81%af">散列信息
+        <a class="ltr:hx-pl-4 rtl:hx-pr-4 hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#hdel">hdel
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
@@ -1100,191 +1078,26 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
         <div class="content">
           <h1>数据类型</h1>
           <h2>String<span class="hx-absolute -hx-mt-20" id="string"></span>
-    <a href="#string" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>set<span class="hx-absolute -hx-mt-20" id="set"></span>
-    <a href="#set" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>set key value [nx | xx] [get] [ex s | px ms | exat unix-ts | pxat unix-tms | keepttl ]</p>
-<ul>
-<li>O(1)</li>
-<li>建立一个key并赋值value，如果该key已存在，则覆盖，并清除原来与key关联的生存时间</li>
-<li>ex seconds：设置过期时间，单位：秒   ，<code>expires</code></li>
-<li>px ms：设置过期时间，单位：毫秒</li>
-<li>exat unix-time-seconds：时间戳格式，以UNIX时间为过期时间，单位：秒</li>
-<li>pxat unix-time-seconds：同上，单位:毫秒</li>
-<li>keepttl : 保留原键值对的生存时间，通过TTL命令可查看，用在该key被覆盖的情况下</li>
-<li>get：建立key时，获取该key的旧值；如果该key以前没有值，则返回nil</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>成功：“OK”</li>
-<li>键不存在：（nil）</li>
-</ul>
-<!-- raw HTML omitted -->
-<p>setrange key offset value</p>
-<ul>
-<li>O(1)</li>
-<li>替换字符串</li>
-<li>从偏移量开始替换新的value</li>
-<li>偏移量在字符串尾部-&gt;追加</li>
-<li>offset&gt;=0</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>目标key的新长度</li>
-</ul>
-<p>示例：</p>
-<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+    <a href="#string" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>是Redis最基本的数据类型，特点是二进制安全，可以存储任何类型的数据，包括文本、数字、图像、序列化等，存储最大大小为512MB</p>
+<h3>set<span class="hx-absolute -hx-mt-20" id="set"></span>
+    <a href="#set" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
   
 
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>redis&gt; set key <span style="color:#e6db74">&#34;Hello World&#34;</span>
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; set key <span style="color:#e6db74">&#34;Hello World&#34;</span> ex <span style="color:#ae81ff">10</span>
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;OK&#34;</span>
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>redis&gt; setrange key <span style="color:#ae81ff">6</span> <span style="color:#e6db74">&#34;Redis&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">11</span>
 </span></span><span style="display:flex;"><span>redis&gt; get key
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Hello Redis&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
-  <button
-    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
-    title="Copy code"
-  >
-    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
-    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
-  </button>
-</div>
-
-  
-</div>
-<!-- raw HTML omitted -->
-<p>msetnx key value [key value……]</p>
-<ul>
-<li>连续设置多个key的值</li>
-<li>原子性的操作</li>
-<li>如果原来key存在值，不会执行覆盖操作</li>
-<li>如果有一个值存在的话，这个命令会直接取消，操作回滚，返回0</li>
-</ul>
-<p>返回值</p>
-<ul>
-<li>原子性操作成功：1</li>
-<li>不成功：0</li>
-</ul>
-<p>示例</p>
-<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
-
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>redis&gt; MSETNX key1 <span style="color:#e6db74">&#34;Hello&#34;</span> key2 <span style="color:#e6db74">&#34;there&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>redis&gt; MSETNX key2 <span style="color:#e6db74">&#34;new&#34;</span> key3 <span style="color:#e6db74">&#34;world&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>redis&gt; MGET key1 key2 key3
-</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;Hello&#34;</span>
-</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;there&#34;</span>
-</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>nil<span style="color:#f92672">)</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
-  <button
-    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
-    title="Copy code"
-  >
-    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
-    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
-  </button>
-</div>
-
-  
-</div>
-<!-- raw HTML omitted -->
-<p>mset key1 value1 [key2 value2 ……]</p>
-<ul>
-<li>设置多个值 ,  multi set</li>
-<li>原子性的操作</li>
-<li>会覆盖值</li>
-<li>
-<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
-
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>redis&gt; MSET key1 <span style="color:#e6db74">&#34;Hello&#34;</span> key2 <span style="color:#e6db74">&#34;World&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;OK&#34;</span>
-</span></span><span style="display:flex;"><span>redis&gt; GET key1
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Hello&#34;</span>
-</span></span><span style="display:flex;"><span>redis&gt; GET key2
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;World</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
-  <button
-    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
-    title="Copy code"
-  >
-    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
-    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
-  </button>
-</div>
-
-  
-</div>
-</li>
-</ul>
-<h3>append<span class="hx-absolute -hx-mt-20" id="append"></span>
-    <a href="#append" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>append key value</p>
-<ul>
-<li>追加值</li>
-<li>如果key不存在，则新建</li>
-<li>存在，则追加到尾部</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>key的长度</li>
-</ul>
-<h3>incr/decr<span class="hx-absolute -hx-mt-20" id="incrdecr"></span>
-    <a href="#incrdecr" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>incr key</p>
-<ul>
-<li>O(1)</li>
-<li>类型：<code>整数表示的字符串</code>，不能是错误的类型或者包含一个不能表示为整数的字符串</li>
-<li>报错：<code>ERR value is not an integer or out of range</code></li>
-<li>步长：该命令为1，这个命令可以自定义步长 <code>incrby key step</code></li>
-<li>长度：64位有符号整数，基数为10</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>增量后的key值</li>
-</ul>
-<!-- raw HTML omitted -->
-<p>decr key</p>
-<ul>
-<li>O(1)</li>
-<li>步长：该命令为1，这个命令可以自定义步长 <code>decrby key step</code></li>
-<li>长度：64位有符号整数</li>
-<li>类型：整数表示的字符串</li>
-<li>报错：<code>ERR value is not an integer or out of range</code></li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>减少后的key值</li>
-</ul>
-<!-- raw HTML omitted -->
-<p>incrbyfloat key step</p>
-<ul>
-<li>
-<p>step：浮点数表示的字符串，可以是科学计数法</p>
-</li>
-<li>
-<p>key是被减数，step是减数，key.value=key.value-step</p>
-</li>
-<li>
-<p>精度：小数点后<code>17</code>位</p>
-</li>
-<li>
-<p>尾部的0会消掉</p>
-</li>
-<li>
-<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
-
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>redis&gt; SET mykey 10.50
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;OK&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#消0</span>
-</span></span><span style="display:flex;"><span>redis&gt; INCRBYFLOAT mykey 0.1
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;10.6&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#减少</span>
-</span></span><span style="display:flex;"><span>redis&gt; INCRBYFLOAT mykey -5
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5.6&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Hello Redis&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>redis&gt; SET mykey 5.0e3
+</span></span><span style="display:flex;"><span>redis&gt; mset k1 v1 k2 v2
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;OK&#34;</span>
-</span></span><span style="display:flex;"><span>redis&gt; INCRBYFLOAT mykey 2.0e2
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;5200&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>redis&gt; append k1 song
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>redis&gt; get k1
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;v1song&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -1296,75 +1109,83 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
 
   
 </div>
-</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>增量/减少后的值</li>
-</ul>
-<!-- raw HTML omitted -->
+<h3>incr/decr<span class="hx-absolute -hx-mt-20" id="incrdecr"></span>
+    <a href="#incrdecr" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; set num <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;OK&#34;</span>
+</span></span><span style="display:flex;"><span>redis&gt; incr num
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>redis&gt; incrby num <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>redis&gt; incrbyfloat num 0.1
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;12.1&#34;</span>
+</span></span><span style="display:flex;"><span>--- decr只能操作整数
+</span></span><span style="display:flex;"><span>redis&gt; decr num
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>redis&gt; decrby num <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">0</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
 <h3>get<span class="hx-absolute -hx-mt-20" id="get"></span>
-    <a href="#get" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>get key</p>
-<ul>
-<li>获取key对应的value</li>
-<li>get命令只能处理字符串</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>成功：对应的value</li>
-<li>空值：(nil)</li>
-<li>报错：类型错误，get命令只能处理字符串</li>
-</ul>
-<!-- raw HTML omitted -->
-<p>getdel key</p>
-<ul>
-<li>获得一个值，成功之后，删除该key</li>
-<li>应用在字符串类型</li>
-</ul>
-<p>返回值</p>
-<ul>
-<li>存在：该key的值</li>
-<li>不存在：nil</li>
-<li>类型错误：报错</li>
-</ul>
-<!-- raw HTML omitted -->
-<p>getex key [ex s | px ms | exat unix-TS| pxat unix-TMS| persist]</p>
-<ul>
-<li>获得一个key，并且可以重新设置这个key的<code>过期时间</code></li>
-<li>persist：坚持的意思，移除该key的过期时间</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>同<code>get</code></li>
-</ul>
-<!-- raw HTML omitted -->
-<p>getrange key start end</p>
-<ul>
-<li>
-<p>获得一个字符串的子串，和java的String.substring()一样</p>
-</li>
-<li>
-<p>start,end：可以为负数，负数表示从尾部开始的偏移量</p>
-</li>
-<li>
-<p>偏移量：0~(len-1)</p>
-</li>
-<li>
+    <a href="#get" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>redis&gt; set key <span style="color:#e6db74">&#34;Hello World&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;OK&#34;</span>
+</span></span><span style="display:flex;"><span>redis&gt; get key
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Hello World&#34;</span>
+</span></span><span style="display:flex;"><span>redis&gt; get nonexistentkey
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>nil<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>redis&gt; getrange key <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Hello&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>strlen<span class="hx-absolute -hx-mt-20" id="strlen"></span>
+    <a href="#strlen" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; set key <span style="color:#e6db74">&#34;Hello World&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;OK&#34;</span>
+</span></span><span style="display:flex;"><span>redis&gt; strlen key
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">11</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>lcs<span class="hx-absolute -hx-mt-20" id="lcs"></span>
+    <a href="#lcs" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>最长公共子序列，时间复杂度O(n*m)</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
   
 
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>set mykey <span style="color:#e6db74">&#34;This is a string&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;OK&#34;</span>
-</span></span><span style="display:flex;"><span>GETRANGE mykey <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">3</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;This&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#尾部偏移量</span>
-</span></span><span style="display:flex;"><span>GETRANGE mykey -3 -1
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;ing&#34;</span>
-</span></span><span style="display:flex;"><span>redis&gt; GETRANGE mykey <span style="color:#ae81ff">0</span> -1
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;This is a string&#34;</span>
-</span></span><span style="display:flex;"><span>redis&gt; GETRANGE mykey <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">100</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;string&#34;</span>
-</span></span><span style="display:flex;"><span>redis&gt; </span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>lcs key1 key2 <span style="color:#f92672">[</span>len<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>idx<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>minmatchlen len<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>withmatchlen<span style="color:#f92672">]</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -1376,48 +1197,7 @@ redis&gt; set key &#34;Hello World&#34; &#34;OK&#34; redis&gt; setrange key 6 &#
 
   
 </div>
-</li>
-</ul>
-<p>返回值：字符串</p>
 <ul>
-<li>key不存在，返回 “”</li>
-</ul>
-<!-- raw HTML omitted -->
-<p>getset key value</p>
-<ul>
-<li>获得一个值，并设置一个新值</li>
-<li>类似于有get参数的set命令</li>
-<li>用法：原子性的复位操作，获得一个值立马复位</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>存在：老值</li>
-<li>不存在：nil</li>
-</ul>
-<!-- raw HTML omitted -->
-<p>mget k1,k2,k3……</p>
-<ul>
-<li>连续获取多个key</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>值列表</li>
-</ul>
-<h3>strlen<span class="hx-absolute -hx-mt-20" id="strlen"></span>
-    <a href="#strlen" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>strlen key</p>
-<ul>
-<li>返回字符串的长度</li>
-</ul>
-<p>返回值：</p>
-<ul>
-<li>存在：长度</li>
-<li>不存在：0</li>
-</ul>
-<h3>lcs<span class="hx-absolute -hx-mt-20" id="lcs"></span>
-    <a href="#lcs" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>（largest common subsequence ）
-lcs key1 key2 [len] [idx] [minmatchlen len] [withmatchlen]</p>
-<ul>
-<li>最长公共子序列算法，O(n*m)</li>
 <li>可以比较两个字符串的相似程度</li>
 <li>len：返回<code>lcs的长度</code></li>
 <li>idx：返回匹配字符串对应的位置</li>
@@ -1431,327 +1211,307 @@ lcs key1 key2 [len] [idx] [minmatchlen len] [withmatchlen]</p>
 <li>有idx：返回匹配字符串的位置数组</li>
 </ul>
 <h2>List<span class="hx-absolute -hx-mt-20" id="list"></span>
-    <a href="#list" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ul>
+    <a href="#list" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>一个<code>双向链表</code>，可以用来存储一系列按照插入顺序排序的字符串。Redis 列表可以从两端推入或弹出元素，支持从两端进行阻塞操作，非常适合用于实现队列、栈、消息队列等功能。</p>
+<ul>
 <li>存储<code>多个</code>值</li>
 <li>每个值在list中是有<code>顺序的</code></li>
 <li>数据结构：<code>双向链表</code></li>
 </ul>
-<h4>列表<span class="hx-absolute -hx-mt-20" id="列表"></span>
-    <a href="#%e5%88%97%e8%a1%a8" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><table>
-<thead>
-<tr>
-<th style="text-align:center">命令</th>
-<th style="text-align:center">解释</th>
-<th style="text-align:left">参数</th>
-<th style="text-align:center">使用</th>
-<th style="text-align:center">返回值</th>
-<th style="text-align:center">用于</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">lindex</td>
-<td style="text-align:center">列表中某个位置的元素值</td>
-<td style="text-align:left">“下标值&quot;</td>
-<td style="text-align:center">lindex list 0</td>
-<td style="text-align:center">索引位置</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">llen</td>
-<td style="text-align:center">返回列表的长度</td>
-<td style="text-align:left"></td>
-<td style="text-align:center">llen list1</td>
-<td style="text-align:center">长度。key不存在返回0</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">lpos</td>
-<td style="text-align:center">返回元素所在的位置</td>
-<td style="text-align:left">rank：匹配的第几个元素；count：返回几个元素；maxlen：最后匹配几次</td>
-<td style="text-align:center">lpos list &ldquo;hello&rdquo; rank 3 count 2 maxlen 100</td>
-<td style="text-align:center">正确操作，返回index。没有元素：带count返回空数组，不带count返回nil。</td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<h4>添加<span class="hx-absolute -hx-mt-20" id="添加"></span>
-    <a href="#%e6%b7%bb%e5%8a%a0" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><table>
-<thead>
-<tr>
-<th style="text-align:center">命令</th>
-<th style="text-align:center">解释</th>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">使用</th>
-<th style="text-align:center">返回值</th>
-<th style="text-align:center">用于</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">lpush</td>
-<td style="text-align:center">left push，在链表<code>头部</code>插入一个元素，如果key不存在则新建</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"><code>lpush city bengbu beijing</code></td>
-<td style="text-align:center">长度</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rpush</td>
-<td style="text-align:center">right push，在链表<code>尾部</code>插入一个元素，如果key不存在则新建</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"><code>rpush name hello world</code></td>
-<td style="text-align:center">长度</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">lpushx</td>
-<td style="text-align:center">只有在key存在时才会向头部添加元素，key不存在不操作</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"><code>lpushx city bengbu beijing</code></td>
-<td style="text-align:center">长度</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rpushx</td>
-<td style="text-align:center">只有在key存在时才会向尾部添加元素，key不存在不操作</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"><code>rpushx name hello world</code></td>
-<td style="text-align:center">长度</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">linsert</td>
-<td style="text-align:center">在某个元素前或后插入一个元素</td>
-<td style="text-align:center">&lt;before / after&gt; pivot  element</td>
-<td style="text-align:center"><code>linsert list1 before &quot;world&quot; &quot;hello&quot;</code></td>
-<td style="text-align:center">如果pivot不存在，返回-1；如果key不存在，不执行操作，返回0；操作成功，返回key的长度。</td>
-<td></td>
-</tr>
-<tr>
-<td style="text-align:center">rpoplpush</td>
-<td style="text-align:center">原子删除<code>源列表</code>最后一个并且将这个元素添加到<code>目标列表</code>第一个；源列表不存在，则不操作</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"><code>rpoplpush list1 list2</code></td>
-<td style="text-align:center">弹出和推送的元素</td>
-<td style="text-align:center">简单的MQ；循环列表</td>
-</tr>
-<tr>
-<td style="text-align:center">brpoplpush</td>
-<td style="text-align:center">同上，加一个阻塞连接应用在<code>源列表</code></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">lmove</td>
-<td style="text-align:center">原子移动。删除的位置和添加的位置可以指定</td>
-<td style="text-align:center">第一个&lt;left/right&gt;代表<code>源列表</code>的删除位置。第二个&lt;left/right&gt;代表<code>目标列表</code>的添加位置。</td>
-<td style="text-align:center">lmove list1 list2 &lt;left/right&gt; &lt;left/right&gt;</td>
-<td style="text-align:center">弹出和推送的元素</td>
-<td style="text-align:center">简单的MQ；循环列表</td>
-</tr>
-<tr>
-<td style="text-align:center">blmove</td>
-<td style="text-align:center">同上，加一个阻塞连接应用在<code>源列表</code></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">列表没有元素则等待</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<h4>获取<span class="hx-absolute -hx-mt-20" id="获取"></span>
-    <a href="#%e8%8e%b7%e5%8f%96" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><table>
-<thead>
-<tr>
-<th style="text-align:center">命令</th>
-<th style="text-align:center">复杂度+解释</th>
-<th style="text-align:center">参数</th>
-<th>使用</th>
-<th>返回值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">lrange</td>
-<td style="text-align:center">O(S+N)，下标为0开始；获取区域段的元素</td>
-<td style="text-align:center">负数为尾部的偏移量；整数为头部的偏移量；-1为最后一个元素</td>
-<td><code>lrange list1 0 -1</code></td>
-<td>元素列表</td>
-</tr>
-</tbody>
-</table>
-<h4>修改<span class="hx-absolute -hx-mt-20" id="修改"></span>
-    <a href="#%e4%bf%ae%e6%94%b9" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><table>
-<thead>
-<tr>
-<th style="text-align:center">命令</th>
-<th style="text-align:center">复杂度+解释</th>
-<th style="text-align:center">参数</th>
-<th>使用</th>
-<th>返回值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">lset</td>
-<td style="text-align:center">O(N)，修改指定位置的元素值</td>
-<td style="text-align:center">index；使用时可以结合lindex命令</td>
-<td><code>lset list1 1 &quot;hello&quot;</code></td>
-<td>“ok”</td>
-</tr>
-</tbody>
-</table>
-<h4>移除<span class="hx-absolute -hx-mt-20" id="移除"></span>
-    <a href="#%e7%a7%bb%e9%99%a4" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>复杂度+解释</th>
-<th>参数</th>
-<th>使用</th>
-<th>返回值</th>
-<th>用于</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>lpop</td>
-<td>移除并返回给定数量的元素，从头部</td>
-<td></td>
-<td><code>lpop list 2</code></td>
-<td>返回移除的元素;key不存在，返回nil</td>
-<td></td>
-</tr>
-<tr>
-<td>rpop</td>
-<td>同上</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>blpop</td>
-<td>O(N),阻塞的移除列表的元素；如果几个key中至少有一个是有元素的就不会阻塞；然后几个key中，都没有元素，则会阻塞timeout时间，会一直等待这几个key，添加元素进来，并移除;</td>
-<td>timeout为秒数；timeout=0时表示无限期阻塞。</td>
-<td><code>blpop k1 k2 k3 20</code></td>
-<td>移除的列表和移除的元素</td>
-<td>事件通知</td>
-</tr>
-<tr>
-<td>brpop</td>
-<td>同上</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>lrem</td>
-<td>O(N+M)；移除与element参数<code>相等</code>的count个元素；</td>
-<td>count&gt;0，从头部移除。count&lt;0，从尾部移除。count=0，删除所有相等的元素。</td>
-<td><code>lrem list1  0 “hello”</code></td>
-<td>移除元素的个数</td>
-<td></td>
-</tr>
-<tr>
-<td>ltrim</td>
-<td>O(N)；修剪列表，</td>
-<td>如果start&gt;end，则是清空列表</td>
-<td><code>ltrim list1 0 2</code></td>
-<td>ok</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<h3>lrange<span class="hx-absolute -hx-mt-20" id="lrange"></span>
+    <a href="#lrange" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>获取列表中指定范围的元素</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; lpush list <span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#e6db74">&#34;world&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>redis&gt; lrange list <span style="color:#ae81ff">0</span> -1
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;world&#34;</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;hello&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>获取列表的长度：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; lpush list <span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#e6db74">&#34;world&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>redis&gt; llen list
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">2</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>获取元素值：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; lpush list <span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#e6db74">&#34;world&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>redis&gt; lindex list <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;world&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>lpush/rpush<span class="hx-absolute -hx-mt-20" id="lpushrpush"></span>
+    <a href="#lpushrpush" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; lpush names <span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#e6db74">&#34;world&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>world , hello<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>redis&gt; rpush names <span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#e6db74">&#34;world&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>hello , world<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span> 只有在key存在时，才会向头/尾部添加元素 <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>redis&gt; lpushx list <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>redis&gt; rpushx list <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span> 在world 之前 插入 hello <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>redis&gt; linsert names before <span style="color:#e6db74">&#34;world&#34;</span> <span style="color:#e6db74">&#34;hello&#34;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>消息队列特性：</p>
+<ul>
+<li>从一个列表的一端删除，在另一个列表的一端插入</li>
+<li>源列表当作生产者的消息队列，目标列表当作消费者的消息队列</li>
+<li>A[a,b,c]_B[1,2,3]，操作之后，A[a,b]_B[c,1,2,3]</li>
+</ul>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; rpoplpush source target 
+</span></span><span style="display:flex;"><span>redis&gt; brpopolpush source target timeout</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>循环列表特性：</p>
+<ul>
+<li>原子移动</li>
+<li>可以指定左右端，进行移动元素</li>
+</ul>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; lpush list <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span> 这时候就是循环列表的特性 <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>redis&gt; lmove list list left right
+</span></span><span style="display:flex;"><span>redis&gt; blmove list list left right timeout</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>lset<span class="hx-absolute -hx-mt-20" id="lset"></span>
+    <a href="#lset" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; lpush list <span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#e6db74">&#34;world&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>redis&gt; lset list <span style="color:#ae81ff">0</span> <span style="color:#e6db74">&#34;song&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;OK&#34;</span>
+</span></span><span style="display:flex;"><span>redis&gt; lrange list <span style="color:#ae81ff">0</span> -1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>bulk<span style="color:#f92672">)</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;song&#34;</span>, <span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">]</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>lpop<span class="hx-absolute -hx-mt-20" id="lpop"></span>
+    <a href="#lpop" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>redis&gt; lpush list <span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#e6db74">&#34;world&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span> 左部移除 <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>redis&gt; lpop list <span style="color:#f92672">[</span>num<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span> 右部移除 <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>redis&gt; rpop list <span style="color:#f92672">[</span>num<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span> 去除相等的 <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>redis&gt; lrem list1  <span style="color:#ae81ff">0</span> “hello”</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
 <h2>Set<span class="hx-absolute -hx-mt-20" id="set-1"></span>
-    <a href="#set-1" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ul>
+    <a href="#set-1" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>一个无序集合，集合中的每个成员都是唯一的，即集合中不能有重复的成员。Set 提供了丰富的操作方法，允许执行多种集合操作，如求交集、并集、差集等</p>
+<ul>
 <li>无序、唯一</li>
 <li>最大元素个数  2^32-1 (4,294,967,295) 40多亿</li>
 </ul>
 <h3>sadd<span class="hx-absolute -hx-mt-20" id="sadd"></span>
-    <a href="#sadd" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>sadd key element1,&hellip;.</p>
-<ul>
-<li><code> sadd city “fuyang” “bengbu”</code></li>
-<li>如果元素已存在，则忽略</li>
-<li>返回值：添加到集合的个数</li>
-</ul>
-<h3>smove<span class="hx-absolute -hx-mt-20" id="smove"></span>
-    <a href="#smove" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>smove source destination member</p>
-<ul>
-<li>移动元素，将source里的menber移动到destination中</li>
-<li>如果源集合不存在或不存在该元素，则不执行操作并返回0</li>
-<li>返回值：1 移动成功</li>
-</ul>
-<h3>删除<span class="hx-absolute -hx-mt-20" id="删除"></span>
-    <a href="#%e5%88%a0%e9%99%a4" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><code>spop</code></p>
-<ul>
-<li><code>随机的</code>移除+返回元素</li>
-<li><code>spop set1 3</code></li>
-</ul>
-<p><code>srem</code></p>
-<ul>
-<li>删除指定的元素</li>
-<li><code>srem set1 &quot;one&quot; &quot;two&quot;</code></li>
-</ul>
+    <a href="#sadd" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>向集合中添加元素</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; sadd set <span style="color:#e6db74">&#34;one&#34;</span> <span style="color:#e6db74">&#34;two&#34;</span> <span style="color:#e6db74">&#34;three&#34;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">3</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>spop<span class="hx-absolute -hx-mt-20" id="spop"></span>
+    <a href="#spop" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">{</span> 随机的移除元素 <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>redis&gt; spop set <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>bulk<span style="color:#f92672">)</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;one&#34;</span>, <span style="color:#e6db74">&#34;two&#34;</span>, <span style="color:#e6db74">&#34;three&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>redis&gt; srem set <span style="color:#e6db74">&#34;one&#34;</span> <span style="color:#e6db74">&#34;two&#34;</span> <span style="color:#e6db74">&#34;three&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">3</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
 <h3>集合信息<span class="hx-absolute -hx-mt-20" id="集合信息"></span>
-    <a href="#%e9%9b%86%e5%90%88%e4%bf%a1%e6%81%af" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><code>scard</code></p>
-<ul>
-<li>返回集合的基数（元素的个数）</li>
-<li><code>scard city</code></li>
-</ul>
-<p><code>sismember</code></p>
-<ul>
-<li>判读元素是否在集合中</li>
-<li><code>sismember set1 “one”</code></li>
-<li>返回值：1在；0不在</li>
-</ul>
-<p><code>smismember</code></p>
-<ul>
-<li>判断多个元素是否在集合中</li>
-<li><code>smismember set1 “one” “two&quot;</code></li>
-<li>返回值：1在；0不在</li>
-</ul>
-<p><code>smembers</code></p>
-<ul>
-<li>获得集合的所有元素(all)</li>
-<li><code>smembers set1</code> 等同于 <code>sinter set1</code></li>
-</ul>
-<p><code>srandmember</code></p>
-<ul>
-<li>随机的获取元素</li>
-<li><code>srandmemeber set1 count</code></li>
-<li>count:
-<ul>
-<li>如果count&gt;0，则随机返回<code>不同的元素</code></li>
-<li>如果count&lt;0，则允许返回<code>相同的元素</code>，并且当count&gt;基数时，重复更多</li>
-</ul>
-</li>
-</ul>
-<p><code>sscan</code></p>
-<ul>
-<li>扫描集合中匹配的元素</li>
-<li><code>sscan key cursor [match pattern] [count n]</code></li>
-<li>同<code>scan</code></li>
-</ul>
+    <a href="#%e9%9b%86%e5%90%88%e4%bf%a1%e6%81%af" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>返回集合的基数（元素的个数）</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; sadd city <span style="color:#e6db74">&#34;北京&#34;</span> <span style="color:#e6db74">&#34;上海&#34;</span> <span style="color:#e6db74">&#34;深圳&#34;</span> <span style="color:#e6db74">&#34;广州&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>redis&gt; scard city
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">4</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>判读元素是否在集合中</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; sadd city <span style="color:#e6db74">&#34;北京&#34;</span> <span style="color:#e6db74">&#34;上海&#34;</span> <span style="color:#e6db74">&#34;深圳&#34;</span> <span style="color:#e6db74">&#34;广州&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>redis&gt; sismember city <span style="color:#e6db74">&#34;北京&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>redis&gt; smismember city <span style="color:#e6db74">&#34;深圳&#34;</span> <span style="color:#e6db74">&#34;上海&#34;</span>
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> <span style="color:#ae81ff">1</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<p>获得集合的所有元素</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; sadd city <span style="color:#e6db74">&#34;北京&#34;</span> <span style="color:#e6db74">&#34;上海&#34;</span> <span style="color:#e6db74">&#34;深圳&#34;</span> <span style="color:#e6db74">&#34;广州&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>redis&gt; smembers city
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;北京&#34;</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;上海&#34;</span>
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;深圳&#34;</span>
+</span></span><span style="display:flex;"><span>4<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;广州&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>redis&gt; srandmemeber city <span style="color:#ae81ff">3</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
 <h3>差集、交集、并集<span class="hx-absolute -hx-mt-20" id="差集交集并集"></span>
-    <a href="#%e5%b7%ae%e9%9b%86%e4%ba%a4%e9%9b%86%e5%b9%b6%e9%9b%86" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><code>sdiff</code></p>
-<ul>
-<li>
-<p>返回第一个集合和后续集合的差异的值</p>
-</li>
-<li>
-<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+    <a href="#%e5%b7%ae%e9%9b%86%e4%ba%a4%e9%9b%86%e5%b9%b6%e9%9b%86" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
   
 
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># key1 = {a,b,c,d}</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># key2 = {c}</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># key3 = {a,c,e}</span>
-</span></span><span style="display:flex;"><span>sdiff key1 key2 key3  
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># res={b,d}</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">{</span> sdiff , sdiffstore , sinter , sinterstore , sunion , sunionstore <span style="color:#f92672">}</span> </span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -1763,185 +1523,64 @@ lcs key1 key2 [len] [idx] [minmatchlen len] [withmatchlen]</p>
 
   
 </div>
-</li>
-</ul>
-<p><code>sdiffstore</code></p>
-<ul>
-<li>同<code>sdiff</code>，但是结果存储到另一个集合中，会重写</li>
-<li><code>sdiffstore destination key1 key2</code></li>
-</ul>
-<p><code>sinter</code></p>
-<ul>
-<li>
-<p>intersection</p>
-</li>
-<li>
-<p>返回第一个集合与后续集合的交集</p>
-</li>
-<li>
-<p>不存在的键为空集，与空集相交结果为空</p>
-</li>
-<li>
-<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
-
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># key1 = {a,b,c,d}</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># key2 = {c}</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># key3 = {a,c,e}</span>
-</span></span><span style="display:flex;"><span>sdiff key1 key2 key3  
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># res={c}</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
-  <button
-    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
-    title="Copy code"
-  >
-    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
-    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
-  </button>
-</div>
-
-  
-</div>
-</li>
-</ul>
-<p><code>sintercard</code></p>
-<ul>
-<li>返回交集的基数</li>
-<li><code>sintercard numkeys key [key ...] [limit 2]</code></li>
-<li>numkeys 为集合的数量</li>
-<li>limit为限制，当取到limit个交集数量就停止了</li>
-</ul>
-<p><code>sinterstore</code></p>
-<ul>
-<li>交集结果存储到另一个集合中，并重写</li>
-</ul>
-<p><code>sunion</code></p>
-<ul>
-<li>
-<p>并集</p>
-</li>
-<li>
-<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
-
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># key1 = {a,b,c,d}</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># key2 = {c}</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># key3 = {a,c,e}</span>
-</span></span><span style="display:flex;"><span>sdiff key1 key2 key3  
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># res={a,b,c,d,e}</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
-  <button
-    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
-    title="Copy code"
-  >
-    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
-    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
-  </button>
-</div>
-
-  
-</div>
-</li>
-</ul>
-<p><code>sunionstore</code></p>
-<ul>
-<li>并集结果存储到另一个集合中，并重写</li>
-</ul>
 <h2>Map<span class="hx-absolute -hx-mt-20" id="map"></span>
-    <a href="#map" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>添加字段<span class="hx-absolute -hx-mt-20" id="添加字段"></span>
-    <a href="#%e6%b7%bb%e5%8a%a0%e5%ad%97%e6%ae%b5" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><code>hset</code></p>
-<ul>
-<li><code>hset key field value [field value ...]</code></li>
-<li>创建一个Hash，已存在则添加</li>
-<li>会覆盖已存在的field的值</li>
-<li>返回值：添加的字段数</li>
-</ul>
-<p><code>hsetnx</code></p>
-<ul>
-<li><code>hsetnx key field value</code></li>
-<li>field存在时，不进行操作</li>
-<li>key不存在时，创建一个新散列</li>
-<li>返回值：1、0；是否成功添加一个字段</li>
-</ul>
-<h3>获取字段<span class="hx-absolute -hx-mt-20" id="获取字段"></span>
-    <a href="#%e8%8e%b7%e5%8f%96%e5%ad%97%e6%ae%b5" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><code>hget</code></p>
-<ul>
-<li><code>hget key field</code></li>
-<li>获取散列的某个字段的值</li>
-<li>返回值：正确值； nil字段不存在、key不存在</li>
-</ul>
-<p><code>hmget</code></p>
-<ul>
-<li>同时获取散列的多个字段值</li>
-<li><code>hmget key f1 f2 f3...</code></li>
-</ul>
-<p><code>hgetall</code></p>
-<ul>
-<li><code>hgetall key</code></li>
-<li>获取散列的所有信息</li>
-</ul>
-<h3>删除字段<span class="hx-absolute -hx-mt-20" id="删除字段"></span>
-    <a href="#%e5%88%a0%e9%99%a4%e5%ad%97%e6%ae%b5" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><code>hdel</code>   –<code>BigKey时推荐</code></p>
-<ul>
-<li><code>hdel key field [field ...]</code></li>
-<li>返回值：删除的字段数量</li>
-</ul>
-<h3>修改字段值<span class="hx-absolute -hx-mt-20" id="修改字段值"></span>
-    <a href="#%e4%bf%ae%e6%94%b9%e5%ad%97%e6%ae%b5%e5%80%bc" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><code>hincrby</code></p>
-<ul>
-<li>整数 <code>增加、减少</code></li>
-<li><code>hincrby key field int</code></li>
-<li>如果key不存在，则新建，并且对应字段值为0，然后增加</li>
-<li>如果field不存在，则新建，并且对应字段值为0，然后增加</li>
-<li>数值范围：64位有符号整数 int</li>
-</ul>
-<p><code>hincrbyfloat</code></p>
-<ul>
-<li>浮点数</li>
-<li><code>hincrbyfloat key field float</code></li>
-<li>等同于<code>incrbyfloat</code></li>
-</ul>
-<h3>散列信息<span class="hx-absolute -hx-mt-20" id="散列信息"></span>
-    <a href="#%e6%95%a3%e5%88%97%e4%bf%a1%e6%81%af" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p><code>hexists</code></p>
-<ul>
-<li>判断字段值是否存在</li>
-<li><code>hexists key field</code></li>
-<li>返回值：1存在；0不存在、key不存在</li>
-</ul>
-<p><code>hscan</code></p>
-<ul>
-<li>扫描散列</li>
-<li><code>hscan key cursor [MATCH pattern] [count n]</code></li>
-<li>等同于<code>scan</code></li>
-</ul>
-<p><code>hkeys</code></p>
-<ul>
-<li>获取散列的所有字段名称</li>
-<li><code>hkeys key</code></li>
-</ul>
-<p><code>hvals</code></p>
-<ul>
-<li>获取散列存储的所有值，values</li>
-<li><code>hvals key</code></li>
-</ul>
-<p><code>hlen</code></p>
-<ul>
-<li>获取散列的字段个数</li>
-<li><code>hlen key</code></li>
-</ul>
-<p><code>hstrlen</code></p>
-<ul>
-<li>获取指定字段的值的字符串长度</li>
-<li><code>hstrlen key field</code></li>
-<li>返回值：0字段不存在。</li>
-</ul>
-<p><code>hrandfield</code></p>
-<ul>
-<li><code>hrandfield key  n withvalues </code></li>
-<li>返回随机字段</li>
-<li><code>hrandfield key</code>  返回一个随机字段 field</li>
-<li><code>hrandfield key 3</code> 返回一个数组，包含3个字段 field，<code>不重复</code>，数组长度为 Math.min(hlen,3)</li>
-<li><code>hrandfield key -5</code> 返回一个数组，包含3个字段 field，<code>可以重复</code></li>
-<li><code>hrandfield key -10 withvalues </code>返回一个数据，包含字段和字段值</li>
-</ul>
+    <a href="#map" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Map数据类型实际指的是 Hash，它是一个键值对集合，类似于编程语言中的哈希表或字典。Redis 的 Hash 适用于存储对象类型的数据，特别是在需要存储多个字段的数据结构中。</p>
+<h3>hset<span class="hx-absolute -hx-mt-20" id="hset"></span>
+    <a href="#hset" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; hset user_song name song age <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>redis&gt; hsetnx</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>hget<span class="hx-absolute -hx-mt-20" id="hget"></span>
+    <a href="#hget" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>redis&gt; hset user_song name song age <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>redis&gt; hget user_song name
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>redis&gt; hgetall user_song</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
+<h3>hdel<span class="hx-absolute -hx-mt-20" id="hdel"></span>
+    <a href="#hdel" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>redis&gt; hdel user_song name
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>integer<span style="color:#f92672">)</span> <span style="color:#ae81ff">1</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+
+  
+</div>
 <h2>Sorted Set<span class="hx-absolute -hx-mt-20" id="sorted-set"></span>
     <a href="#sorted-set" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ul>
 <li>元素唯一、有序（分数）</li>

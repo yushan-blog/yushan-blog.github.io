@@ -119,5 +119,7 @@
     <loc>https://yushan-blog.github.io/categories/</loc>
   </url><url>
     <loc>https://yushan-blog.github.io/tags/</loc>
+  </url><url>
+    <loc>https://yushan-blog.github.io/datastruct/</loc>
   </url>
 </urlset>
