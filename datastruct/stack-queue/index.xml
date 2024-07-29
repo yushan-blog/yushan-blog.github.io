@@ -1,0 +1,18 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>雨山-Blog – 栈和队列</title>
+    <link>https://yushan-blog.github.io/datastruct/stack-queue/</link>
+    <description>Recent content in 栈和队列 on 雨山-Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://yushan-blog.github.io/datastruct/stack-queue/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

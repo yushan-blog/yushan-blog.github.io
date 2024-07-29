@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>宋雨山 – </title>
+    <title>雨山-Blog – </title>
     <link>https://yushan-blog.github.io/</link>
-    <description>Recent content on 宋雨山</description>
+    <description>Recent content on 雨山-Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 May 2024 15:14:11 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2024 12:00:00 +0800</lastBuildDate>
     
 	  <atom:link href="https://yushan-blog.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,6 +13,252 @@
       
       
     
+    
+    <item>
+      <title>安装与配置</title>
+      <link>https://yushan-blog.github.io/essay/setup/</link>
+      <pubDate>Mon, 29 Jul 2024 12:00:00 +0800</pubDate>
+      
+      <guid>https://yushan-blog.github.io/essay/setup/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;JDK&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;jdk&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#jdk&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;linux下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从Oracle官网下载jdk&lt;/li&gt;
+&lt;li&gt;上传至指定目录中，如&lt;code&gt;/usr/local&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;解压压缩包&lt;code&gt;tar -zxvf jdk-8u202-linux-x64.tar.gz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置环境变量&lt;code&gt;vim /etc/profile&lt;/code&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export JAVA_HOME&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/usr/local/jdk1.8.0_202
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export JRE_HOME&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;JAVA_HOME&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;/jre
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export CLASSPATH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;.:&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;JAVA_HOME&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;/lib/dt.jar:&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;JAVA_HOME&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;/lib/tools.jar
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export PATH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;JAVA_HOME&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;/bin:$PATH&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;执行&lt;code&gt;source /etc/profile&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;检查JDK是否安装成功&lt;code&gt;java -version&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Maven&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;maven&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#maven&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;linux下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从官网&lt;a href=&#34;https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Maven&lt;/a&gt;下载压缩包&lt;/li&gt;
+&lt;li&gt;上传到指定目录中，如&lt;code&gt;/usr/local&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;解压压缩包&lt;code&gt;tar -zxvf maven-3.6.3-bin.tar.gz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置环境变量&lt;code&gt;vim /etc/profile&lt;/code&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export MAVEN_HOME&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/usr/local/maven-3.6.3
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export PATH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;MAVEN_HOME&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;/bin:$PATH&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;配置settings.xml
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;settings&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 修改本地仓库地址 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;localRepository&amp;gt;&lt;/span&gt;/usr/local/maven-repository&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/localRepository&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;mirrors&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 配置阿里云仓库 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;mirror&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;aliyunmaven&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;mirrorOf&amp;gt;&lt;/span&gt;*&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/mirrorOf&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;aliyun nexus&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://maven.aliyun.com/repository/public&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/mirror&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/mirrors&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/settings&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;执行&lt;code&gt;source /etc/profile&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;检查Maven是否安装成功&lt;code&gt;mvn -v&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>windows下操作</title>
+      <link>https://yushan-blog.github.io/essay/windows/</link>
+      <pubDate>Fri, 26 Jul 2024 16:00:00 +0800</pubDate>
+      
+      <guid>https://yushan-blog.github.io/essay/windows/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;端口和进程&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;端口和进程&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e7%ab%af%e5%8f%a3%e5%92%8c%e8%bf%9b%e7%a8%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;查看端口的占用和进程，并且kill进程&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;netstat -ano | findstr &lt;span style=&#34;color:#ae81ff&#34;&gt;6379&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tasklist | findstr redis-server
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;taskkill /F /PID &lt;span style=&#34;color:#ae81ff&#34;&gt;1234&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;taskkill /F /IM redis-server.exe&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Java开发规范</title>
+      <link>https://yushan-blog.github.io/essay/java-standard/</link>
+      <pubDate>Fri, 26 Jul 2024 09:00:00 +0800</pubDate>
+      
+      <guid>https://yushan-blog.github.io/essay/java-standard/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;规范&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;规范&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e8%a7%84%e8%8c%83&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;通过学习阿里巴巴开源的Java开发规范，学习到一些编程规范，通过编程规范，让开发小组提高开发效率，减少bug，提高代码质量。&lt;/p&gt;
+&lt;h2&gt;名称&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;名称&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%90%8d%e7%a7%b0&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;类名大驼峰：&lt;code&gt;UserInfo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;变量名小驼峰：&lt;code&gt;user&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;常量名全大写：&lt;code&gt;USER_INFO_DICT&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;布尔型不要写is：&lt;code&gt;isDeleted&lt;/code&gt; -&amp;gt; &lt;code&gt;deleted&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于MVC中&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Service层命名：&lt;code&gt;UserInfoService&lt;/code&gt;，且在应用中暴露的都是Service接口&lt;/li&gt;
+&lt;li&gt;Service实现类命名：&lt;code&gt;UserInfoServiceImpl&lt;/code&gt;，以&lt;code&gt;impl&lt;/code&gt;结尾&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Service/DAO 层方法命名规约&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;获取单个对象的方法用 get 做前缀。&lt;/li&gt;
+&lt;li&gt;获取多个对象的方法用 list 做前缀。&lt;/li&gt;
+&lt;li&gt;获取统计值的方法用 count 做前缀。&lt;/li&gt;
+&lt;li&gt;插入的方法用 save/insert 做前缀。&lt;/li&gt;
+&lt;li&gt;删除的方法用 remove/delete 做前缀。&lt;/li&gt;
+&lt;li&gt;修改的方法用 update 做前缀。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;领域模型命名规约&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据对象：xxxDO，xxx 即为数据表名。&lt;/li&gt;
+&lt;li&gt;数据传输对象：xxxDTO，xxx 为业务领域相关的名称。&lt;/li&gt;
+&lt;li&gt;展示对象：xxxVO，xxx 一般为网页名称。&lt;/li&gt;
+&lt;li&gt;POJO 是 DO/DTO/BO/VO 的统称，禁止命名成 xxxPOJO。&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>https://yushan-blog.github.io/essay/git/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://yushan-blog.github.io/essay/git/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;简介&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;简介&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e7%ae%80%e4%bb%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;需求：若是编辑一个文件时，想去保留每次修改的版本，以便当想去回滚版本的时候，也就是这次修改的不行，想要去使用以前的版本，所以，最常见的就是每次修改都另存为一个新文件，这种方法简单，但是繁琐&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;发展历史&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;本地化版本控制系统&lt;/li&gt;
+&lt;li&gt;集中式版本控制系统：多个主机使用一个中央服务器的版本数据库，容易单点故障，出现故障的时候，多个主机无法工作&lt;/li&gt;
+&lt;li&gt;分布式版本控制系统&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Git&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;git&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#git&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;（分布式版本控制系统）&lt;/p&gt;
+&lt;p&gt;Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立一个仓库，这个仓库可以存储好多文件并进行管理，而且是直接存储&lt;code&gt;文件快照&lt;/code&gt;，也就是每个主机都有文件的备份，可以解决集中式版本控制系统的单点故障问题。&lt;/p&gt;
+&lt;p&gt;也就是说，当文件被更改的时候，新的版本记录的是最新的全量文件，而不是记录修改的差异，而且没有修改的文件则是链接，链接到上个版本文件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;snapshots.png&#34; alt=&#34;快照&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;仓库中文件状态&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;仓库中文件状态&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e4%bb%93%e5%ba%93%e4%b8%ad%e6%96%87%e4%bb%b6%e7%8a%b6%e6%80%81&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;仓库中有很多文件，每种文件都有不同的状态，有新建的、修改的、完成的，在Git中，可以理解为仓库中有箱子将这些不同状态的文件区分出来，需要人工手动地将文件移动到其他箱子，从而改变文件的状态。&lt;/p&gt;
+&lt;p&gt;状态：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;已修改&lt;/code&gt;：是指目前文件内容和仓库记录该文件的内容不一样&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;已暂存&lt;/code&gt;：是指记录了文件可以更新了，以便更新到仓库中记录的最新内容&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;已提交&lt;/code&gt;：是指文件在仓库中已经是最新内容，安全的保存成功&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总的来分，所有的文件都是两个状态&lt;code&gt;未跟踪&lt;/code&gt;和&lt;code&gt;已跟踪&lt;/code&gt;，未跟踪的文件是不属于仓库管理的文件，比如你新建一个文件的时候，这个文件就属于未跟踪状态，只有在使用命令&lt;code&gt;git add&lt;/code&gt;将文件移动到暂存区，才会变成已跟踪状态。已跟踪状态则是已经提交和已经修改，已提交的文件是安全的保存在仓库中，已修改的文件是修改了，但是还没有提交（commit）到仓库中。&lt;/p&gt;
+&lt;p&gt;所以，根据文件的状态可以将仓库划分三个区域，&lt;code&gt;工作区&lt;/code&gt;、&lt;code&gt;暂存区&lt;/code&gt;、&lt;code&gt;git仓库&lt;/code&gt;；&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;工作区：是Git仓库压缩出来的一部分，以便用户可以修改这些文件&lt;/li&gt;
+&lt;li&gt;暂存区：是一个文件，记录需要提交的修改后的文件&lt;/li&gt;
+&lt;li&gt;Git仓库：是最终的数据库，保存的都是最新的内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;areas.png&#34; alt=&#34;区域&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;安装和配置&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;安装和配置&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%ae%89%e8%a3%85%e5%92%8c%e9%85%8d%e7%bd%ae&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;官网：&lt;a href=&#34;https://git-scm.com/downloads&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Git下载&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;配置&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置用户名和邮箱，因为在提交代码的时候，需要记录提交者的信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+  
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global user.name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;yushan song&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global user.email &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;yushan.song@gmail.com&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;--global&lt;/code&gt;，这个是全局配置，如果只对当前仓库生效，则不需要加&lt;/p&gt;
+&lt;h2&gt;操作&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;操作&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%93%8d%e4%bd%9c&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;git add &amp;lt;file&amp;gt;&lt;/code&gt;
+将文件添加到暂存区，精确的说：‘是将文件添加到下一个版本中’，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
     
     <item>
       <title>终端</title>
@@ -66,8 +312,7 @@
 &lt;li&gt;要进行测试的话，在每个文件内添加&lt;code&gt;echo&lt;/code&gt;命令就可&lt;/li&gt;
 &lt;li&gt;判断是哪个shell，-bash是登录式shell&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;
-    &lt;img src=&#34;.././images/shell.png&#34; alt=&#34;shell.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;shell.png&#34; alt=&#34;shell.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;h2&gt;使用&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;使用&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#%e4%bd%bf%e7%94%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;
       </description>
@@ -86,8 +331,7 @@
 &lt;p&gt;1961年——出生在荷兰莱斯镇 &lt;!-- raw HTML omitted --&gt;
 1985年——代尔夫特理工大学毕业，获得电气工程学士学位&lt;!-- raw HTML omitted --&gt;
 1988年——开发Vim&lt;!-- raw HTML omitted --&gt;
-
-    &lt;img src=&#34;.././images/BramMoolenaar.png&#34; alt=&#34;BramMoolenaar.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;BramMoolenaar.png&#34; alt=&#34;BramMoolenaar.png&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;h1&gt;简介&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;Vim开源、免费的文本编辑器&lt;/li&gt;
 &lt;li&gt;Vim初始是根据Vi来编写的&lt;/li&gt;
@@ -126,8 +370,7 @@
 &lt;li&gt;全文复制
 思路 第一行为gg,最后一行为G,复制为yy，结合起来，在可视令模式下输入 ggyG&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;
-    &lt;img src=&#34;.././images/vim.png&#34; alt=&#34;vim快捷键&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;vim.png&#34; alt=&#34;vim快捷键&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;h1&gt;配置&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;可以使用Vbundle进行插件配置&lt;/li&gt;
 &lt;li&gt;主要是vimrc文件，可以在~/.vimrc中配置自己想要的配置&lt;/li&gt;

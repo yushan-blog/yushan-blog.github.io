@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
 
-  <title>主从复制 – 宋雨山</title>
+  <title>主从复制 – 雨山-Blog</title>
   <meta name="description" content="概念 redis的高可用技术 复制：复制数据 将一台redis服务器的数据，复制到其他的redis服务器。前者称为主节点(master)，后者称为从节点(slave)； 数据的复制是单向的，只能由主节点到从节点。 默认情况下，每台Redis服务器都是主节点 且一个主节点可以有多个从节点(或没有从节点)，但一个从节点只能有一个主节点，一对多的。 当redis服务崩溃，有一些自动重启工具，特别的是持久化关闭，则内存的数据集为空，也会导致从节点的数据集为空 作用 数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。 故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余。 负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写Redis数据时应用连接主节点，读Redis数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高Redis服务器的并发量。 高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是Redis高可用的基础。 使用 注意：主从复制的关系操作都是由从节点发起的，和主节点没有关系
 开启 配置文件 replicaof
 可以在当前机器的配置文件中配置自己的主节点：
@@ -43,8 +43,9 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
 <meta property="article:published_time" content="2024-05-24T15:14:01+08:00" />
 <meta property="article:modified_time" content="2024-05-24T15:14:01+08:00" />
 
+  
   <meta itemprop="name" content="主从复制">
-<meta itemprop="description" content="概念 redis的高可用技术 复制：复制数据 将一台redis服务器的数据，复制到其他的redis服务器。前者称为主节点(master)，后者称为从节点(slave)； 数据的复制是单向的，只能由主节点到从节点。 默认情况下，每台Redis服务器都是主节点 且一个主节点可以有多个从节点(或没有从节点)，但一个从节点只能有一个主节点，一对多的。 当redis服务崩溃，有一些自动重启工具，特别的是持久化关闭，则内存的数据集为空，也会导致从节点的数据集为空 作用 数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。 故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余。 负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写Redis数据时应用连接主节点，读Redis数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高Redis服务器的并发量。 高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是Redis高可用的基础。 使用 注意：主从复制的关系操作都是由从节点发起的，和主节点没有关系
+  <meta itemprop="description" content="概念 redis的高可用技术 复制：复制数据 将一台redis服务器的数据，复制到其他的redis服务器。前者称为主节点(master)，后者称为从节点(slave)； 数据的复制是单向的，只能由主节点到从节点。 默认情况下，每台Redis服务器都是主节点 且一个主节点可以有多个从节点(或没有从节点)，但一个从节点只能有一个主节点，一对多的。 当redis服务崩溃，有一些自动重启工具，特别的是持久化关闭，则内存的数据集为空，也会导致从节点的数据集为空 作用 数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。 故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余。 负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写Redis数据时应用连接主节点，读Redis数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高Redis服务器的并发量。 高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是Redis高可用的基础。 使用 注意：主从复制的关系操作都是由从节点发起的，和主节点没有关系
 开启 配置文件 replicaof
 可以在当前机器的配置文件中配置自己的主节点：
 replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
@@ -52,12 +53,13 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
 临时设置，主从设置只能由从节点来发出
 启动服务命令redis-server redis.conf —slaveof ip port
 断开复制 命令：slaveof no one 命令查看主从复制的信息： info replication
-主节点信息 role:master //当前机器的角色：主节点、从节点 connected_slaves:0//指连接到当前机器的节点，有多少个从节点（孩子） #表示该节点的从节点信息 slave0:ip=127.0.0.1,port=63991,state=online,offset=238,lag=1 slave1:ip=127.0.0.1,port=63992,state=online,offset=238,lag=0 master_failover_state:no-failover master_replid:6ddb8b10ff26f48ca9d1ec9b4bb6a90e3acd4ca3//指该节点的主节点ID，默认是自己的ID master_replid2:0000000000000000000000000000000000000000 master_repl_offset:0 second_repl_offset:-1 repl_backlog_active:0 repl_backlog_size:1048576 //复制积压缓冲区的大小（字节） repl_backlog_first_byte_offset:0 //第一个字节的偏移量 repl_backlog_histlen:0 从节点信息 role:slave//当前身份为从节点 master_host:127.0.0.1 //主节点的IP master_port:6399 //主节点的端口号 master_link_status:up //连接的状态 master_last_io_seconds_ago:4 master_sync_in_progress:0 slave_read_repl_offset:10411 slave_repl_offset:10411 //从节点保存的复制偏移量 slave_priority:100 slave_read_only:1 replica_announced:1 connected_slaves:0 master_failover_state:no-failover master_replid:77f8706123a909da8065a99c210388c1656b3afa master_replid2:0000000000000000000000000000000000000000 master_repl_offset:10411 second_repl_offset:-1 repl_backlog_active:1 repl_backlog_size:1048576 repl_backlog_first_byte_offset:10161 //第一次连接的数据偏移量 repl_backlog_histlen:251 注意！！！"><meta itemprop="datePublished" content="2024-05-24T15:14:01+08:00" />
-<meta itemprop="dateModified" content="2024-05-24T15:14:01+08:00" />
-<meta itemprop="wordCount" content="823">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="主从复制"/>
-<meta name="twitter:description" content="概念 redis的高可用技术 复制：复制数据 将一台redis服务器的数据，复制到其他的redis服务器。前者称为主节点(master)，后者称为从节点(slave)； 数据的复制是单向的，只能由主节点到从节点。 默认情况下，每台Redis服务器都是主节点 且一个主节点可以有多个从节点(或没有从节点)，但一个从节点只能有一个主节点，一对多的。 当redis服务崩溃，有一些自动重启工具，特别的是持久化关闭，则内存的数据集为空，也会导致从节点的数据集为空 作用 数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。 故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余。 负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写Redis数据时应用连接主节点，读Redis数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高Redis服务器的并发量。 高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是Redis高可用的基础。 使用 注意：主从复制的关系操作都是由从节点发起的，和主节点没有关系
+主节点信息 role:master //当前机器的角色：主节点、从节点 connected_slaves:0//指连接到当前机器的节点，有多少个从节点（孩子） #表示该节点的从节点信息 slave0:ip=127.0.0.1,port=63991,state=online,offset=238,lag=1 slave1:ip=127.0.0.1,port=63992,state=online,offset=238,lag=0 master_failover_state:no-failover master_replid:6ddb8b10ff26f48ca9d1ec9b4bb6a90e3acd4ca3//指该节点的主节点ID，默认是自己的ID master_replid2:0000000000000000000000000000000000000000 master_repl_offset:0 second_repl_offset:-1 repl_backlog_active:0 repl_backlog_size:1048576 //复制积压缓冲区的大小（字节） repl_backlog_first_byte_offset:0 //第一个字节的偏移量 repl_backlog_histlen:0 从节点信息 role:slave//当前身份为从节点 master_host:127.0.0.1 //主节点的IP master_port:6399 //主节点的端口号 master_link_status:up //连接的状态 master_last_io_seconds_ago:4 master_sync_in_progress:0 slave_read_repl_offset:10411 slave_repl_offset:10411 //从节点保存的复制偏移量 slave_priority:100 slave_read_only:1 replica_announced:1 connected_slaves:0 master_failover_state:no-failover master_replid:77f8706123a909da8065a99c210388c1656b3afa master_replid2:0000000000000000000000000000000000000000 master_repl_offset:10411 second_repl_offset:-1 repl_backlog_active:1 repl_backlog_size:1048576 repl_backlog_first_byte_offset:10161 //第一次连接的数据偏移量 repl_backlog_histlen:251 注意！！！">
+  <meta itemprop="datePublished" content="2024-05-24T15:14:01+08:00">
+  <meta itemprop="dateModified" content="2024-05-24T15:14:01+08:00">
+  <meta itemprop="wordCount" content="823">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="主从复制">
+  <meta name="twitter:description" content="概念 redis的高可用技术 复制：复制数据 将一台redis服务器的数据，复制到其他的redis服务器。前者称为主节点(master)，后者称为从节点(slave)； 数据的复制是单向的，只能由主节点到从节点。 默认情况下，每台Redis服务器都是主节点 且一个主节点可以有多个从节点(或没有从节点)，但一个从节点只能有一个主节点，一对多的。 当redis服务崩溃，有一些自动重启工具，特别的是持久化关闭，则内存的数据集为空，也会导致从节点的数据集为空 作用 数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。 故障恢复：当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余。 负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写Redis数据时应用连接主节点，读Redis数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高Redis服务器的并发量。 高可用基石：除了上述作用以外，主从复制还是哨兵和集群能够实施的基础，因此说主从复制是Redis高可用的基础。 使用 注意：主从复制的关系操作都是由从节点发起的，和主节点没有关系
 开启 配置文件 replicaof
 可以在当前机器的配置文件中配置自己的主节点：
 replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
@@ -65,10 +67,10 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
 临时设置，主从设置只能由从节点来发出
 启动服务命令redis-server redis.conf —slaveof ip port
 断开复制 命令：slaveof no one 命令查看主从复制的信息： info replication
-主节点信息 role:master //当前机器的角色：主节点、从节点 connected_slaves:0//指连接到当前机器的节点，有多少个从节点（孩子） #表示该节点的从节点信息 slave0:ip=127.0.0.1,port=63991,state=online,offset=238,lag=1 slave1:ip=127.0.0.1,port=63992,state=online,offset=238,lag=0 master_failover_state:no-failover master_replid:6ddb8b10ff26f48ca9d1ec9b4bb6a90e3acd4ca3//指该节点的主节点ID，默认是自己的ID master_replid2:0000000000000000000000000000000000000000 master_repl_offset:0 second_repl_offset:-1 repl_backlog_active:0 repl_backlog_size:1048576 //复制积压缓冲区的大小（字节） repl_backlog_first_byte_offset:0 //第一个字节的偏移量 repl_backlog_histlen:0 从节点信息 role:slave//当前身份为从节点 master_host:127.0.0.1 //主节点的IP master_port:6399 //主节点的端口号 master_link_status:up //连接的状态 master_last_io_seconds_ago:4 master_sync_in_progress:0 slave_read_repl_offset:10411 slave_repl_offset:10411 //从节点保存的复制偏移量 slave_priority:100 slave_read_only:1 replica_announced:1 connected_slaves:0 master_failover_state:no-failover master_replid:77f8706123a909da8065a99c210388c1656b3afa master_replid2:0000000000000000000000000000000000000000 master_repl_offset:10411 second_repl_offset:-1 repl_backlog_active:1 repl_backlog_size:1048576 repl_backlog_first_byte_offset:10161 //第一次连接的数据偏移量 repl_backlog_histlen:251 注意！！！"/>
+主节点信息 role:master //当前机器的角色：主节点、从节点 connected_slaves:0//指连接到当前机器的节点，有多少个从节点（孩子） #表示该节点的从节点信息 slave0:ip=127.0.0.1,port=63991,state=online,offset=238,lag=1 slave1:ip=127.0.0.1,port=63992,state=online,offset=238,lag=0 master_failover_state:no-failover master_replid:6ddb8b10ff26f48ca9d1ec9b4bb6a90e3acd4ca3//指该节点的主节点ID，默认是自己的ID master_replid2:0000000000000000000000000000000000000000 master_repl_offset:0 second_repl_offset:-1 repl_backlog_active:0 repl_backlog_size:1048576 //复制积压缓冲区的大小（字节） repl_backlog_first_byte_offset:0 //第一个字节的偏移量 repl_backlog_histlen:0 从节点信息 role:slave//当前身份为从节点 master_host:127.0.0.1 //主节点的IP master_port:6399 //主节点的端口号 master_link_status:up //连接的状态 master_last_io_seconds_ago:4 master_sync_in_progress:0 slave_read_repl_offset:10411 slave_repl_offset:10411 //从节点保存的复制偏移量 slave_priority:100 slave_read_only:1 replica_announced:1 connected_slaves:0 master_failover_state:no-failover master_replid:77f8706123a909da8065a99c210388c1656b3afa master_replid2:0000000000000000000000000000000000000000 master_repl_offset:10411 second_repl_offset:-1 repl_backlog_active:1 repl_backlog_size:1048576 repl_backlog_first_byte_offset:10161 //第一次连接的数据偏移量 repl_backlog_histlen:251 注意！！！">
 
-    <link rel="preload" href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" as="style" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
-    <link href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" rel="stylesheet" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
+    <link rel="preload" href="/css/compiled/main.min.96a47a349c4e73616cdeb7b50ac27fc871a37886f87d13c6cc634d13d579308d.css" as="style" integrity="sha256-lqR6NJxOc2Fs3re1CsJ/yHGjeIb4fRPGzGNNE9V5MI0=" />
+    <link href="/css/compiled/main.min.96a47a349c4e73616cdeb7b50ac27fc871a37886f87d13c6cc634d13d579308d.css" rel="stylesheet" integrity="sha256-lqR6NJxOc2Fs3re1CsJ/yHGjeIb4fRPGzGNNE9V5MI0=" />
 
 
 
@@ -109,9 +111,9 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
 
   <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
     <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
-        <img class="hx-block dark:hx-hidden" src="/images/logo.svg" alt="宋雨山" height="20" width="40" />
-        <img class="hx-hidden dark:hx-block" src="/images/logo-dark.svg" alt="宋雨山" height="20" width="40" />
-        <span class="hx-mx-2 hx-font-extrabold hx-inline hx-select-none" title="宋雨山">宋雨山</span>
+        <img class="hx-block dark:hx-hidden" src="/images/logo.svg" alt="雨山-Blog" height="20" width="40" />
+        <img class="hx-hidden dark:hx-block" src="/images/logo-dark.svg" alt="雨山-Blog" height="20" width="40" />
+        <span class="hx-mx-2 hx-font-extrabold hx-inline hx-select-none" title="雨山-Blog">雨山-Blog</span>
     </a><a
             title="文档"
             href="/"
@@ -451,6 +453,32 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
           <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/"
+    
+  >支付功能
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/wx/"
+    
+  >微信支付
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/alipay/"
+    
+  >支付宝支付
+    </a>
+              
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/"
     
   >开发框架
@@ -553,6 +581,38 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
         <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/setup/"
+    
+  >安装与配置
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/windows/"
+    
+  >windows下操作
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/java-standard/"
+    
+  >Java开发规范
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/git/"
+    
+  >Git
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/essay/bash/"
     
   >终端
@@ -573,8 +633,27 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/datastruct/"
     
-  >数据结构
-    </a></li>
+  >数据结构和算法
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/list/"
+    
+  >数组和链表
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/stack-queue/"
+    
+  >栈和队列
+    </a>
+              
+            </li></ul>
+      </div></li>
       <li class="[word-break:break-word] hx-mt-5 hx-mb-2 hx-px-2 hx-py-1.5 hx-text-sm hx-font-semibold hx-text-gray-900 first:hx-mt-0 dark:hx-text-gray-100">
         <span class="hx-cursor-default">More</span>
       </li>
@@ -810,6 +889,32 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
           <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/"
+    
+  >支付功能
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/wx/"
+    
+  >微信支付
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/alipay/"
+    
+  >支付宝支付
+    </a>
+              
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/"
     
   >开发框架
@@ -912,6 +1017,38 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
         <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/setup/"
+    
+  >安装与配置
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/windows/"
+    
+  >windows下操作
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/java-standard/"
+    
+  >Java开发规范
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/git/"
+    
+  >Git
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/essay/bash/"
     
   >终端
@@ -932,8 +1069,27 @@ replicaof &lt;主节点IP&gt; &lt;主节点redis的端口号&gt;
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/datastruct/"
     
-  >数据结构
-    </a></li>
+  >数据结构和算法
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/list/"
+    
+  >数组和链表
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/stack-queue/"
+    
+  >栈和队列
+    </a>
+              
+            </li></ul>
+      </div></li>
         
       <li class="[word-break:break-word] hx-mt-5 hx-mb-2 hx-px-2 hx-py-1.5 hx-text-sm hx-font-semibold hx-text-gray-900 first:hx-mt-0 dark:hx-text-gray-100">
         <span class="hx-cursor-default">More</span>

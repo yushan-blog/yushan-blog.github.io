@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
 
-  <title>日志 – 宋雨山</title>
+  <title>日志 – 雨山-Blog</title>
   <meta name="description" content="redo log 重做日志 主要是记录更新操作的细节，然后记录到文件中，为了mysql崩溃时能够恢复 可以保证事务的持久性 为什么需要这个redo log
 数据是存放在磁盘上，用户是通过cpu来操作的，两者之间速度是非常慢的，通常是需要缓冲池（是内存中的一个页面）作中间缓冲，缓存表数据与索引数据，避免多次磁盘IO。 但是一个更新操作完成后，代表这有数据变了，磁盘上的数据要更改。先更新了缓冲池，但是mysql进程挂了，后续无法操作，导致磁盘中没有更新，造成数据丢失。 有一个暴力解决： 可以在事务提交之前，将数据刷新到磁盘中 但会出现多次随机IO，导致速度会非常慢 所以redo log file就出现了，它可以记录每次更新操作，只要将更新详细细节追加到这个文件中，就代表着事务提交成功。 其中细节：
 redo log file出现了，但是这个文件还是在磁盘上的，如果每次事务都进行刷盘，还是会有多次磁盘IO 所以还可以在内存中申请一个缓冲池redo log buffer，记录redo log信息 所以会有一个概念“何时将缓冲池redo log buffer的数据写入到磁盘redo log file文件中？” 刷盘策略 重要的概念，刷盘不是直接写入到磁盘的redo log file，而是写入到文件系统的Page Cache。
@@ -33,22 +33,24 @@ redo log file出现了，但是这个文件还是在磁盘上的，如果每次�
 <meta property="article:published_time" content="2024-05-24T15:14:01+08:00" />
 <meta property="article:modified_time" content="2024-05-24T15:14:01+08:00" />
 
+  
   <meta itemprop="name" content="日志">
-<meta itemprop="description" content="redo log 重做日志 主要是记录更新操作的细节，然后记录到文件中，为了mysql崩溃时能够恢复 可以保证事务的持久性 为什么需要这个redo log
+  <meta itemprop="description" content="redo log 重做日志 主要是记录更新操作的细节，然后记录到文件中，为了mysql崩溃时能够恢复 可以保证事务的持久性 为什么需要这个redo log
 数据是存放在磁盘上，用户是通过cpu来操作的，两者之间速度是非常慢的，通常是需要缓冲池（是内存中的一个页面）作中间缓冲，缓存表数据与索引数据，避免多次磁盘IO。 但是一个更新操作完成后，代表这有数据变了，磁盘上的数据要更改。先更新了缓冲池，但是mysql进程挂了，后续无法操作，导致磁盘中没有更新，造成数据丢失。 有一个暴力解决： 可以在事务提交之前，将数据刷新到磁盘中 但会出现多次随机IO，导致速度会非常慢 所以redo log file就出现了，它可以记录每次更新操作，只要将更新详细细节追加到这个文件中，就代表着事务提交成功。 其中细节：
 redo log file出现了，但是这个文件还是在磁盘上的，如果每次事务都进行刷盘，还是会有多次磁盘IO 所以还可以在内存中申请一个缓冲池redo log buffer，记录redo log信息 所以会有一个概念“何时将缓冲池redo log buffer的数据写入到磁盘redo log file文件中？” 刷盘策略 重要的概念，刷盘不是直接写入到磁盘的redo log file，而是写入到文件系统的Page Cache。
-参数：innodb_flush_log_at_trx_commit控制 缓冲池大小快满的时候 后台线程控制 mysql实例关闭时 innodb_flush_log_at_trx_commit 0：每次事务提交不操作，而是由后台线程来控制，每隔1秒进行刷盘，最多丢失1秒的数据 1：默认的，也是保证持久化必须的，每次事务提交就刷盘，通过fsync从页缓存写入到磁盘中 2：文件系统的页缓存，事务提交，刷新到页缓存，再由页缓存刷新到磁盘 后台线程 innodb有一个后台线程Page Cleaner Thread，会每隔一秒将redo log buffer的数据写入到page cache，然后调用fsync从页缓存中写入到磁盘，但是刷新的是脏页，未修改的数据页是不会刷新的 日志文件组 mysql里不止一个redo文件，在mysql8中默认32个文件，采用环形数组存储。 write pos：代表当前写入的位置，后移操作。 check point：检查点，代表擦除的位置，后移操作。 write pos之后和check point之前，这两个之间代表是可以写入数据的部分。 bin log redo log是保证事务的持久性，是属于InnoDB的 bin log二进制日志，是记录更新语句的原始逻辑，类似于Redis的AOF机制，可以保证一致性 作用 主从复制 主节点将操作写入到bin log文件中 从节点从bin log文件中获取详细信息，实现数据同步 审计、监控 数据恢复 可以恢复指定时间点的数据 重新执行sql语句 记录格式 statement 记录语句的原始状态，可以理解成一模一样 会出现数据不一致的问题，如插入语句中有now()，date()函数之类的。 row 记录语句的更新的具体数据 但是会导致文件比较大 mixed 会先判断语句是否会导致不一致的问题 再去决定用什么存储 具体细节 和redo log一样，还是在内存有一个缓存，binlog cache，在磁盘中还有一个binlog file binlog的是以事务为单位的，只有在事务提交后，才会记录，写入文件。 刷新binlog cache时机，由变量sync_binlog决定 0，事务提交后，不刷新，由系统决定 N，累积N个事务后，刷新缓冲区，执行fsync命令，刷入磁盘 undo log 重做日志 实现回滚，当一个事务异常后，可以根据这个文件进行回滚操作。 问题 脏页 内存区和磁盘区的数据不一致，此时内存区的数据页称为”脏页“ 即便不一致，但是有redo log，也无妨 “脏页”变成“干净页”"><meta itemprop="datePublished" content="2024-05-24T15:14:01+08:00" />
-<meta itemprop="dateModified" content="2024-05-24T15:14:01+08:00" />
-<meta itemprop="wordCount" content="113">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="日志"/>
-<meta name="twitter:description" content="redo log 重做日志 主要是记录更新操作的细节，然后记录到文件中，为了mysql崩溃时能够恢复 可以保证事务的持久性 为什么需要这个redo log
+参数：innodb_flush_log_at_trx_commit控制 缓冲池大小快满的时候 后台线程控制 mysql实例关闭时 innodb_flush_log_at_trx_commit 0：每次事务提交不操作，而是由后台线程来控制，每隔1秒进行刷盘，最多丢失1秒的数据 1：默认的，也是保证持久化必须的，每次事务提交就刷盘，通过fsync从页缓存写入到磁盘中 2：文件系统的页缓存，事务提交，刷新到页缓存，再由页缓存刷新到磁盘 后台线程 innodb有一个后台线程Page Cleaner Thread，会每隔一秒将redo log buffer的数据写入到page cache，然后调用fsync从页缓存中写入到磁盘，但是刷新的是脏页，未修改的数据页是不会刷新的 日志文件组 mysql里不止一个redo文件，在mysql8中默认32个文件，采用环形数组存储。 write pos：代表当前写入的位置，后移操作。 check point：检查点，代表擦除的位置，后移操作。 write pos之后和check point之前，这两个之间代表是可以写入数据的部分。 bin log redo log是保证事务的持久性，是属于InnoDB的 bin log二进制日志，是记录更新语句的原始逻辑，类似于Redis的AOF机制，可以保证一致性 作用 主从复制 主节点将操作写入到bin log文件中 从节点从bin log文件中获取详细信息，实现数据同步 审计、监控 数据恢复 可以恢复指定时间点的数据 重新执行sql语句 记录格式 statement 记录语句的原始状态，可以理解成一模一样 会出现数据不一致的问题，如插入语句中有now()，date()函数之类的。 row 记录语句的更新的具体数据 但是会导致文件比较大 mixed 会先判断语句是否会导致不一致的问题 再去决定用什么存储 具体细节 和redo log一样，还是在内存有一个缓存，binlog cache，在磁盘中还有一个binlog file binlog的是以事务为单位的，只有在事务提交后，才会记录，写入文件。 刷新binlog cache时机，由变量sync_binlog决定 0，事务提交后，不刷新，由系统决定 N，累积N个事务后，刷新缓冲区，执行fsync命令，刷入磁盘 undo log 重做日志 实现回滚，当一个事务异常后，可以根据这个文件进行回滚操作。 问题 脏页 内存区和磁盘区的数据不一致，此时内存区的数据页称为”脏页“ 即便不一致，但是有redo log，也无妨 “脏页”变成“干净页”">
+  <meta itemprop="datePublished" content="2024-05-24T15:14:01+08:00">
+  <meta itemprop="dateModified" content="2024-05-24T15:14:01+08:00">
+  <meta itemprop="wordCount" content="113">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="日志">
+  <meta name="twitter:description" content="redo log 重做日志 主要是记录更新操作的细节，然后记录到文件中，为了mysql崩溃时能够恢复 可以保证事务的持久性 为什么需要这个redo log
 数据是存放在磁盘上，用户是通过cpu来操作的，两者之间速度是非常慢的，通常是需要缓冲池（是内存中的一个页面）作中间缓冲，缓存表数据与索引数据，避免多次磁盘IO。 但是一个更新操作完成后，代表这有数据变了，磁盘上的数据要更改。先更新了缓冲池，但是mysql进程挂了，后续无法操作，导致磁盘中没有更新，造成数据丢失。 有一个暴力解决： 可以在事务提交之前，将数据刷新到磁盘中 但会出现多次随机IO，导致速度会非常慢 所以redo log file就出现了，它可以记录每次更新操作，只要将更新详细细节追加到这个文件中，就代表着事务提交成功。 其中细节：
 redo log file出现了，但是这个文件还是在磁盘上的，如果每次事务都进行刷盘，还是会有多次磁盘IO 所以还可以在内存中申请一个缓冲池redo log buffer，记录redo log信息 所以会有一个概念“何时将缓冲池redo log buffer的数据写入到磁盘redo log file文件中？” 刷盘策略 重要的概念，刷盘不是直接写入到磁盘的redo log file，而是写入到文件系统的Page Cache。
-参数：innodb_flush_log_at_trx_commit控制 缓冲池大小快满的时候 后台线程控制 mysql实例关闭时 innodb_flush_log_at_trx_commit 0：每次事务提交不操作，而是由后台线程来控制，每隔1秒进行刷盘，最多丢失1秒的数据 1：默认的，也是保证持久化必须的，每次事务提交就刷盘，通过fsync从页缓存写入到磁盘中 2：文件系统的页缓存，事务提交，刷新到页缓存，再由页缓存刷新到磁盘 后台线程 innodb有一个后台线程Page Cleaner Thread，会每隔一秒将redo log buffer的数据写入到page cache，然后调用fsync从页缓存中写入到磁盘，但是刷新的是脏页，未修改的数据页是不会刷新的 日志文件组 mysql里不止一个redo文件，在mysql8中默认32个文件，采用环形数组存储。 write pos：代表当前写入的位置，后移操作。 check point：检查点，代表擦除的位置，后移操作。 write pos之后和check point之前，这两个之间代表是可以写入数据的部分。 bin log redo log是保证事务的持久性，是属于InnoDB的 bin log二进制日志，是记录更新语句的原始逻辑，类似于Redis的AOF机制，可以保证一致性 作用 主从复制 主节点将操作写入到bin log文件中 从节点从bin log文件中获取详细信息，实现数据同步 审计、监控 数据恢复 可以恢复指定时间点的数据 重新执行sql语句 记录格式 statement 记录语句的原始状态，可以理解成一模一样 会出现数据不一致的问题，如插入语句中有now()，date()函数之类的。 row 记录语句的更新的具体数据 但是会导致文件比较大 mixed 会先判断语句是否会导致不一致的问题 再去决定用什么存储 具体细节 和redo log一样，还是在内存有一个缓存，binlog cache，在磁盘中还有一个binlog file binlog的是以事务为单位的，只有在事务提交后，才会记录，写入文件。 刷新binlog cache时机，由变量sync_binlog决定 0，事务提交后，不刷新，由系统决定 N，累积N个事务后，刷新缓冲区，执行fsync命令，刷入磁盘 undo log 重做日志 实现回滚，当一个事务异常后，可以根据这个文件进行回滚操作。 问题 脏页 内存区和磁盘区的数据不一致，此时内存区的数据页称为”脏页“ 即便不一致，但是有redo log，也无妨 “脏页”变成“干净页”"/>
+参数：innodb_flush_log_at_trx_commit控制 缓冲池大小快满的时候 后台线程控制 mysql实例关闭时 innodb_flush_log_at_trx_commit 0：每次事务提交不操作，而是由后台线程来控制，每隔1秒进行刷盘，最多丢失1秒的数据 1：默认的，也是保证持久化必须的，每次事务提交就刷盘，通过fsync从页缓存写入到磁盘中 2：文件系统的页缓存，事务提交，刷新到页缓存，再由页缓存刷新到磁盘 后台线程 innodb有一个后台线程Page Cleaner Thread，会每隔一秒将redo log buffer的数据写入到page cache，然后调用fsync从页缓存中写入到磁盘，但是刷新的是脏页，未修改的数据页是不会刷新的 日志文件组 mysql里不止一个redo文件，在mysql8中默认32个文件，采用环形数组存储。 write pos：代表当前写入的位置，后移操作。 check point：检查点，代表擦除的位置，后移操作。 write pos之后和check point之前，这两个之间代表是可以写入数据的部分。 bin log redo log是保证事务的持久性，是属于InnoDB的 bin log二进制日志，是记录更新语句的原始逻辑，类似于Redis的AOF机制，可以保证一致性 作用 主从复制 主节点将操作写入到bin log文件中 从节点从bin log文件中获取详细信息，实现数据同步 审计、监控 数据恢复 可以恢复指定时间点的数据 重新执行sql语句 记录格式 statement 记录语句的原始状态，可以理解成一模一样 会出现数据不一致的问题，如插入语句中有now()，date()函数之类的。 row 记录语句的更新的具体数据 但是会导致文件比较大 mixed 会先判断语句是否会导致不一致的问题 再去决定用什么存储 具体细节 和redo log一样，还是在内存有一个缓存，binlog cache，在磁盘中还有一个binlog file binlog的是以事务为单位的，只有在事务提交后，才会记录，写入文件。 刷新binlog cache时机，由变量sync_binlog决定 0，事务提交后，不刷新，由系统决定 N，累积N个事务后，刷新缓冲区，执行fsync命令，刷入磁盘 undo log 重做日志 实现回滚，当一个事务异常后，可以根据这个文件进行回滚操作。 问题 脏页 内存区和磁盘区的数据不一致，此时内存区的数据页称为”脏页“ 即便不一致，但是有redo log，也无妨 “脏页”变成“干净页”">
 
-    <link rel="preload" href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" as="style" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
-    <link href="/css/compiled/main.min.2d281924a07a1379a60f9457cf36eb70902cce95508ab4fff261f9e49a6bb326.css" rel="stylesheet" integrity="sha256-LSgZJKB6E3mmD5RXzzbrcJAszpVQirT/8mH55JprsyY=" />
+    <link rel="preload" href="/css/compiled/main.min.96a47a349c4e73616cdeb7b50ac27fc871a37886f87d13c6cc634d13d579308d.css" as="style" integrity="sha256-lqR6NJxOc2Fs3re1CsJ/yHGjeIb4fRPGzGNNE9V5MI0=" />
+    <link href="/css/compiled/main.min.96a47a349c4e73616cdeb7b50ac27fc871a37886f87d13c6cc634d13d579308d.css" rel="stylesheet" integrity="sha256-lqR6NJxOc2Fs3re1CsJ/yHGjeIb4fRPGzGNNE9V5MI0=" />
 
 
 
@@ -89,9 +91,9 @@ redo log file出现了，但是这个文件还是在磁盘上的，如果每次�
 
   <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 hx-max-w-[90rem]">
     <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="/">
-        <img class="hx-block dark:hx-hidden" src="/images/logo.svg" alt="宋雨山" height="20" width="40" />
-        <img class="hx-hidden dark:hx-block" src="/images/logo-dark.svg" alt="宋雨山" height="20" width="40" />
-        <span class="hx-mx-2 hx-font-extrabold hx-inline hx-select-none" title="宋雨山">宋雨山</span>
+        <img class="hx-block dark:hx-hidden" src="/images/logo.svg" alt="雨山-Blog" height="20" width="40" />
+        <img class="hx-hidden dark:hx-block" src="/images/logo-dark.svg" alt="雨山-Blog" height="20" width="40" />
+        <span class="hx-mx-2 hx-font-extrabold hx-inline hx-select-none" title="雨山-Blog">雨山-Blog</span>
     </a><a
             title="文档"
             href="/"
@@ -419,6 +421,32 @@ redo log file出现了，但是这个文件还是在磁盘上的，如果每次�
           <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/"
+    
+  >支付功能
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/wx/"
+    
+  >微信支付
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/alipay/"
+    
+  >支付宝支付
+    </a>
+              
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/"
     
   >开发框架
@@ -521,6 +549,38 @@ redo log file出现了，但是这个文件还是在磁盘上的，如果每次�
         <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/setup/"
+    
+  >安装与配置
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/windows/"
+    
+  >windows下操作
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/java-standard/"
+    
+  >Java开发规范
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/git/"
+    
+  >Git
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/essay/bash/"
     
   >终端
@@ -541,8 +601,27 @@ redo log file出现了，但是这个文件还是在磁盘上的，如果每次�
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/datastruct/"
     
-  >数据结构
-    </a></li>
+  >数据结构和算法
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/list/"
+    
+  >数组和链表
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/stack-queue/"
+    
+  >栈和队列
+    </a>
+              
+            </li></ul>
+      </div></li>
       <li class="[word-break:break-word] hx-mt-5 hx-mb-2 hx-px-2 hx-py-1.5 hx-text-sm hx-font-semibold hx-text-gray-900 first:hx-mt-0 dark:hx-text-gray-100">
         <span class="hx-cursor-default">More</span>
       </li>
@@ -778,6 +857,32 @@ redo log file出现了，但是这个文件还是在磁盘上的，如果每次�
           <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/"
+    
+  >支付功能
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/wx/"
+    
+  >微信支付
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/alipay/"
+    
+  >支付宝支付
+    </a>
+              
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/"
     
   >开发框架
@@ -880,6 +985,38 @@ redo log file出现了，但是这个文件还是在磁盘上的，如果每次�
         <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/setup/"
+    
+  >安装与配置
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/windows/"
+    
+  >windows下操作
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/java-standard/"
+    
+  >Java开发规范
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/essay/git/"
+    
+  >Git
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/essay/bash/"
     
   >终端
@@ -900,8 +1037,27 @@ redo log file出现了，但是这个文件还是在磁盘上的，如果每次�
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/datastruct/"
     
-  >数据结构
-    </a></li>
+  >数据结构和算法
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/list/"
+    
+  >数组和链表
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/stack-queue/"
+    
+  >栈和队列
+    </a>
+              
+            </li></ul>
+      </div></li>
         
       <li class="[word-break:break-word] hx-mt-5 hx-mb-2 hx-px-2 hx-py-1.5 hx-text-sm hx-font-semibold hx-text-gray-900 first:hx-mt-0 dark:hx-text-gray-100">
         <span class="hx-cursor-default">More</span>
