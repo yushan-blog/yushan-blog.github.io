@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
@@ -11,65 +11,34 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
 
-  <title>Spring – 雨山-Blog</title>
-  <meta name="description" content="基础概念 Spring使创建Java企业应用程序变得容易。 从Spring Framework 6.0开始，Spring需要Java 17&#43;。 Spring支持广泛的应用场景。 Spring是开源的 引入的思想 OCP（开闭原则）：对扩展开放，对修改关闭
-DIP（依赖倒置原则）：降低程序的耦合度，方便修改，使用面向接口编程、面向对象编程
-IoC（控制反转思想）：反转
-在程序中不采用硬编码的方式去new对象、去维护对象之间的关系 引入Spring Spring是实现控制反转思想的一个框架 XML解析&#43;工厂模式&#43;反射机制
-可以new对象 可以维护对象之间的关系 实现IoC思想方式：依赖注入（dependency injection DI）完成bean管理
-依赖：两个对象之间的关系 注入：是一种方法，数据传递行为，实现两个对象之间的关系 使用Spring 引入spring相关jar包依赖
-需要sping的配置文件 *.xml
-&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt; &lt;beans xmlns=&#34;http://www.springframework.org/schema/beans&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&#34;&gt; &lt;!--这两个就是bean，由spring上下文进行管理--&gt; &lt;bean id=&#34;userBean&#34; class=&#34;com.yushan.bean.User&#34;/&gt; &lt;bean id=&#34;userTestDaoBean&#34; class=&#34;com.yushan.dao.UserTestDao&#34;/&gt; &lt;/beans&gt; 获取Spring容器对象 应用上下文
-ApplicationContext 通过当前类的根路径寻找配置文件：ClassPathXmlApplicationContext 根据文件系统寻找应用上下文：FileSystemXmlApplicationContext 获取bean对象
-创建bean对象的时机：默认创建应用上下文时 applicationContext.getBean(“id”) return new Object(); applicationContext.getBean(“id”,User.class) return new User(); 注意事项
-id不能重复 底层：是解析XML文件，获取结点信息，执行动作 存储结构：Map&lt;String,Object&gt; String : id Object : bean对象 " />
+  <title>Quartz – 雨山-Blog</title>
+  <meta name="description" content="" />
 
   
-    <link rel="canonical" href="https://yushan-blog.github.io/devframe/spring/" itemprop="url" />
+    <link rel="canonical" href="http://localhost:1313/devframe/schedule/quarz/" itemprop="url" />
   
 
   
 
-<meta property="og:title" content="Spring" />
+<meta property="og:title" content="Quartz" />
 <meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://yushan-blog.github.io/devframe/spring/" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/devframe/schedule/quarz/" /><meta property="article:section" content="devframe" />
+<meta property="article:published_time" content="2024-07-30T12:00:00+08:00" />
+<meta property="article:modified_time" content="2024-07-30T12:00:00+08:00" />
 
   
-  <meta itemprop="name" content="Spring">
-  <meta itemprop="description" content="基础概念 Spring使创建Java企业应用程序变得容易。 从Spring Framework 6.0开始，Spring需要Java 17&#43;。 Spring支持广泛的应用场景。 Spring是开源的 引入的思想 OCP（开闭原则）：对扩展开放，对修改关闭
-DIP（依赖倒置原则）：降低程序的耦合度，方便修改，使用面向接口编程、面向对象编程
-IoC（控制反转思想）：反转
-在程序中不采用硬编码的方式去new对象、去维护对象之间的关系 引入Spring Spring是实现控制反转思想的一个框架 XML解析&#43;工厂模式&#43;反射机制
-可以new对象 可以维护对象之间的关系 实现IoC思想方式：依赖注入（dependency injection DI）完成bean管理
-依赖：两个对象之间的关系 注入：是一种方法，数据传递行为，实现两个对象之间的关系 使用Spring 引入spring相关jar包依赖
-需要sping的配置文件 *.xml
-&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt; &lt;beans xmlns=&#34;http://www.springframework.org/schema/beans&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&#34;&gt; &lt;!--这两个就是bean，由spring上下文进行管理--&gt; &lt;bean id=&#34;userBean&#34; class=&#34;com.yushan.bean.User&#34;/&gt; &lt;bean id=&#34;userTestDaoBean&#34; class=&#34;com.yushan.dao.UserTestDao&#34;/&gt; &lt;/beans&gt; 获取Spring容器对象 应用上下文
-ApplicationContext 通过当前类的根路径寻找配置文件：ClassPathXmlApplicationContext 根据文件系统寻找应用上下文：FileSystemXmlApplicationContext 获取bean对象
-创建bean对象的时机：默认创建应用上下文时 applicationContext.getBean(“id”) return new Object(); applicationContext.getBean(“id”,User.class) return new User(); 注意事项
-id不能重复 底层：是解析XML文件，获取结点信息，执行动作 存储结构：Map&lt;String,Object&gt; String : id Object : bean对象 ">
-  <meta itemprop="dateModified" content="2024-05-24T15:14:01+08:00">
-  <meta itemprop="wordCount" content="68">
+  <meta itemprop="name" content="Quartz">
+  <meta itemprop="datePublished" content="2024-07-30T12:00:00+08:00">
+  <meta itemprop="dateModified" content="2024-07-30T12:00:00+08:00">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Spring">
-  <meta name="twitter:description" content="基础概念 Spring使创建Java企业应用程序变得容易。 从Spring Framework 6.0开始，Spring需要Java 17&#43;。 Spring支持广泛的应用场景。 Spring是开源的 引入的思想 OCP（开闭原则）：对扩展开放，对修改关闭
-DIP（依赖倒置原则）：降低程序的耦合度，方便修改，使用面向接口编程、面向对象编程
-IoC（控制反转思想）：反转
-在程序中不采用硬编码的方式去new对象、去维护对象之间的关系 引入Spring Spring是实现控制反转思想的一个框架 XML解析&#43;工厂模式&#43;反射机制
-可以new对象 可以维护对象之间的关系 实现IoC思想方式：依赖注入（dependency injection DI）完成bean管理
-依赖：两个对象之间的关系 注入：是一种方法，数据传递行为，实现两个对象之间的关系 使用Spring 引入spring相关jar包依赖
-需要sping的配置文件 *.xml
-&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt; &lt;beans xmlns=&#34;http://www.springframework.org/schema/beans&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&#34;&gt; &lt;!--这两个就是bean，由spring上下文进行管理--&gt; &lt;bean id=&#34;userBean&#34; class=&#34;com.yushan.bean.User&#34;/&gt; &lt;bean id=&#34;userTestDaoBean&#34; class=&#34;com.yushan.dao.UserTestDao&#34;/&gt; &lt;/beans&gt; 获取Spring容器对象 应用上下文
-ApplicationContext 通过当前类的根路径寻找配置文件：ClassPathXmlApplicationContext 根据文件系统寻找应用上下文：FileSystemXmlApplicationContext 获取bean对象
-创建bean对象的时机：默认创建应用上下文时 applicationContext.getBean(“id”) return new Object(); applicationContext.getBean(“id”,User.class) return new User(); 注意事项
-id不能重复 底层：是解析XML文件，获取结点信息，执行动作 存储结构：Map&lt;String,Object&gt; String : id Object : bean对象 ">
+  <meta name="twitter:title" content="Quartz">
 
-    <link rel="preload" href="/css/compiled/main.min.96a47a349c4e73616cdeb7b50ac27fc871a37886f87d13c6cc634d13d579308d.css" as="style" integrity="sha256-lqR6NJxOc2Fs3re1CsJ/yHGjeIb4fRPGzGNNE9V5MI0=" />
-    <link href="/css/compiled/main.min.96a47a349c4e73616cdeb7b50ac27fc871a37886f87d13c6cc634d13d579308d.css" rel="stylesheet" integrity="sha256-lqR6NJxOc2Fs3re1CsJ/yHGjeIb4fRPGzGNNE9V5MI0=" />
+    <link href="/css/compiled/main.css" rel="stylesheet" />
 
 
 
-  <link href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" rel="stylesheet" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU=" />
+  <link href="/css/custom.css" rel="stylesheet" />
 
 
 
@@ -414,35 +383,14 @@ id不能重复 底层：是解析XML文件，获取结点信息，执行动作 �
   >开发框架
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/spring/"
     
   >Spring
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a>
-  
-    <ul class='hx-flex hx-flex-col hx-gap-1 hx-relative before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] dark:before:hx-bg-neutral-800 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-pr-3 rtl:before:hx-right-0 ltr:hx-ml-3 rtl:hx-mr-3'><li>
-              <a
-                href="#%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5"
-                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
-              >基础概念</a>
-            </li>
-          <li>
-              <a
-                href="#%e5%bc%95%e5%85%a5%e7%9a%84%e6%80%9d%e6%83%b3"
-                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
-              >引入的思想</a>
-            </li>
-          <li>
-              <a
-                href="#%e5%bc%95%e5%85%a5spring"
-                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
-              >引入Spring</a>
-            </li>
-          </ul>
-  
               <div class="ltr:hx-pr-0 hx-overflow-hidden">
         <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
@@ -519,7 +467,7 @@ id不能重复 底层：是解析XML文件，获取结点信息，执行动作 �
               
             </li></ul>
       </div>
-            </li><li class="hx-flex hx-flex-col "><a
+            </li><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/schedule/"
@@ -528,24 +476,17 @@ id不能重复 底层：是解析XML文件，获取结点信息，执行动作 �
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a>
               <div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/devframe/schedule/xxl-job/"
+      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+    href="/devframe/schedule/quarz/"
     
-  >xxl-job
+  >Quartz
     </a>
+  
               
             </li></ul>
       </div>
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/devframe/nginx/"
-    
-  >Nginx
-    </a>
-              
             </li></ul>
       </div></li>
           <li class=""><a
@@ -906,9 +847,9 @@ id不能重复 底层：是解析XML文件，获取结点信息，执行动作 �
   >开发框架
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/spring/"
     
   >Spring
@@ -990,7 +931,7 @@ id不能重复 底层：是解析XML文件，获取结点信息，执行动作 �
               
             </li></ul>
       </div>
-            </li><li class="hx-flex hx-flex-col "><a
+            </li><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/schedule/"
@@ -999,24 +940,16 @@ id不能重复 底层：是解析XML文件，获取结点信息，执行动作 �
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a>
               <div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/devframe/schedule/xxl-job/"
+      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+    href="/devframe/schedule/quarz/"
     
-  >xxl-job
+  >Quartz
     </a>
               
             </li></ul>
       </div>
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/devframe/nginx/"
-    
-  >Nginx
-    </a>
-              
             </li></ul>
       </div></li>
           <li class=""><a
@@ -1172,20 +1105,8 @@ id不能重复 底层：是解析XML文件，获取结点信息，执行动作 �
 </div></div></aside>
     
 <nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
-    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">On this page</p><ul>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5">基础概念
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%bc%95%e5%85%a5%e7%9a%84%e6%80%9d%e6%83%b3">引入的思想
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%bc%95%e5%85%a5spring">引入Spring
-        </a>
-      </li></ul><ul></ul>
-      <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
+    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4">
+      <div class=" hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
         <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
           <span>Scroll to top</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-gray-500 hover:hx-border-gray-900 dark:hx-border-gray-400 dark:hover:hx-border-gray-100 contrast-more:hx-border-gray-800 contrast-more:dark:hx-border-gray-50">
@@ -1201,93 +1122,16 @@ id不能重复 底层：是解析XML文件，获取结点信息，执行动作 �
       <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
         <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
       <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
-        <a href="https://yushan-blog.github.io/devframe/">开发框架</a>
-      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">Spring</div>
+        <a href="http://localhost:1313/devframe/">开发框架</a>
+      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
+        <a href="http://localhost:1313/devframe/schedule/">定时任务</a>
+      </div><svg class="hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">Quartz</div>
 </div>
 
         <div class="content">
-          <h1>Spring</h1>
-          <h2>基础概念<span class="hx-absolute -hx-mt-20" id="基础概念"></span>
-    <a href="#%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ul>
-<li>Spring使创建Java企业应用程序变得容易。</li>
-<li>从Spring Framework 6.0开始，Spring需要Java 17+。</li>
-<li>Spring支持广泛的应用场景。</li>
-<li>Spring是开源的</li>
-</ul>
-<h2>引入的思想<span class="hx-absolute -hx-mt-20" id="引入的思想"></span>
-    <a href="#%e5%bc%95%e5%85%a5%e7%9a%84%e6%80%9d%e6%83%b3" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>OCP（开闭原则）：对扩展开放，对修改关闭</p>
-<p>DIP（依赖倒置原则）：降低程序的耦合度，方便修改，使用面向接口编程、面向对象编程</p>
-<p>IoC（控制反转思想）：反转</p>
-<ul>
-<li>在程序中不采用硬编码的方式去new对象、去维护对象之间的关系</li>
-</ul>
-<h2>引入Spring<span class="hx-absolute -hx-mt-20" id="引入spring"></span>
-    <a href="#%e5%bc%95%e5%85%a5spring" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Spring是实现控制反转思想的一个框架      <code>XML解析+工厂模式+反射机制</code></p>
-<ul>
-<li>可以new对象</li>
-<li>可以维护对象之间的关系</li>
-</ul>
-<p>实现IoC思想方式：依赖注入（dependency injection DI）完成bean管理</p>
-<ul>
-<li>依赖：两个对象之间的关系</li>
-<li>注入：是一种方法，数据传递行为，实现两个对象之间的关系</li>
-</ul>
-<h1>使用Spring</h1><ol>
-<li>
-<p>引入spring相关jar包依赖</p>
-</li>
-<li>
-<p>需要sping的配置文件   *.xml</p>
-<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  
-
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans 		  http://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!--这两个就是bean，由spring上下文进行管理--&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;userBean&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;com.yushan.bean.User&#34;</span><span style="color:#f92672">/&gt;</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;userTestDaoBean&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;com.yushan.dao.UserTestDao&#34;</span><span style="color:#f92672">/&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/beans&gt;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
-  <button
-    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
-    title="Copy code"
-  >
-    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
-    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
-  </button>
-</div>
-
-  
-</div>
-</li>
-<li>
-<p>获取Spring容器对象  应用上下文</p>
-<ul>
-<li>ApplicationContext</li>
-<li>通过当前类的根路径寻找配置文件：ClassPathXmlApplicationContext</li>
-<li>根据文件系统寻找应用上下文：FileSystemXmlApplicationContext</li>
-</ul>
-</li>
-<li>
-<p>获取bean对象</p>
-<ul>
-<li>创建bean对象的时机：默认创建应用上下文时</li>
-<li>applicationContext.getBean(&ldquo;id&rdquo;)   return   new Object();</li>
-<li>applicationContext.getBean(&ldquo;id&rdquo;,User.class)    return   new User();</li>
-</ul>
-</li>
-<li>
-<p>注意事项</p>
-<ul>
-<li>id不能重复</li>
-<li>底层：是解析XML文件，获取结点信息，执行动作</li>
-<li>存储结构：Map&lt;String,Object&gt;     String : id        Object : bean对象</li>
-</ul>
-</li>
-</ol>
-
+          <h1>Quartz</h1>
+          
         </div>
         <div class="hx-mt-16"></div>
         
@@ -1306,11 +1150,11 @@ id不能重复 底层：是解析XML文件，获取结点信息，执行动作 �
   </div>
 </footer>
     
-    <script defer src="/js/main.min.342e1e44bc7342ae62e1a3b59ef97a9517fdcb27179b2b109a683bb5bb77d9a7.js" integrity="sha256-NC4eRLxzQq5i4aO1nvl6lRf9yycXmysQmmg7tbt32ac="></script>
+    <script defer src="/js/main.js" integrity=""></script>
 
 
 <script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
-    <script defer src="/en.search.min.3db95834d7cbb513c5e7bd8ff469faec73b56798f9d73f74f2e09a725dbbeac2.js" integrity="sha256-PblYNNfLtRPF572P9Gn67HO1Z5j51z908uCacl276sI="></script>
+    <script defer src="/en.search.js" integrity=""></script>
 
 
   </body>

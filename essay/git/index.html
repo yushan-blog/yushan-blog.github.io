@@ -24,7 +24,12 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
 工作区：是Git仓库压缩出来的一部分，以便用户可以修改这些文件 暂存区：是一个文件，记录需要提交的修改后的文件 Git仓库：是最终的数据库，保存的都是最新的内容 安装和配置 官网：Git下载
 配置
 配置用户名和邮箱，因为在提交代码的时候，需要记录提交者的信息 git config --global user.name &#34;yushan song&#34; git config --global user.email &#34;yushan.song@gmail.com&#34; --global，这个是全局配置，如果只对当前仓库生效，则不需要加
-操作 git add &lt;file&gt; 将文件添加到暂存区，精确的说：‘是将文件添加到下一个版本中’，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。 " />
+基础 仓库：将整个文件夹变为一个仓库进行管理文件
+本地仓库：如果仅仅个人使用，利用Git的优点管理自己的文件，可以将文件夹变为一个仓库，然后自己进行操作 git init 远程仓库：一般用于多人协作开发一个工程，或者自己推送到软件项目托管平台，以供别人访问及使用 git push origin master git clone &lt;url&gt; 本地仓库内文件操作：
+状态：
+git status 可以查看当前仓库的文件状态，比如你修改了什么，新增了什么，删除了什么 添加至暂存区(stage)：
+git add &lt;file&gt;/&lt;path&gt; 将未跟踪的文件进行跟踪，将已跟踪且修改的文件添加到暂存区 将文件添加到暂存区，精确的说：“是将文件添加到下一个版本中”，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。 比如，当出现Untracked files这个信息，就表示有未跟踪文件（新增的），就可以使用这个命令将其添加到暂存区，交由git管理。 提交到仓库：
+git commit -m &#34;message&#34; 将暂存区的文件提交到仓库中，提交之后，这个文件就变成了已提交状态，可以理解为这个文件是安全的保存在仓库中，可以提交到远程仓库中。 分支 " />
 
   
     <link rel="canonical" href="https://yushan-blog.github.io/essay/git/" itemprop="url" />
@@ -45,7 +50,12 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
 工作区：是Git仓库压缩出来的一部分，以便用户可以修改这些文件 暂存区：是一个文件，记录需要提交的修改后的文件 Git仓库：是最终的数据库，保存的都是最新的内容 安装和配置 官网：Git下载
 配置
 配置用户名和邮箱，因为在提交代码的时候，需要记录提交者的信息 git config --global user.name &#34;yushan song&#34; git config --global user.email &#34;yushan.song@gmail.com&#34; --global，这个是全局配置，如果只对当前仓库生效，则不需要加
-操作 git add &lt;file&gt; 将文件添加到暂存区，精确的说：‘是将文件添加到下一个版本中’，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。 " />
+基础 仓库：将整个文件夹变为一个仓库进行管理文件
+本地仓库：如果仅仅个人使用，利用Git的优点管理自己的文件，可以将文件夹变为一个仓库，然后自己进行操作 git init 远程仓库：一般用于多人协作开发一个工程，或者自己推送到软件项目托管平台，以供别人访问及使用 git push origin master git clone &lt;url&gt; 本地仓库内文件操作：
+状态：
+git status 可以查看当前仓库的文件状态，比如你修改了什么，新增了什么，删除了什么 添加至暂存区(stage)：
+git add &lt;file&gt;/&lt;path&gt; 将未跟踪的文件进行跟踪，将已跟踪且修改的文件添加到暂存区 将文件添加到暂存区，精确的说：“是将文件添加到下一个版本中”，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。 比如，当出现Untracked files这个信息，就表示有未跟踪文件（新增的），就可以使用这个命令将其添加到暂存区，交由git管理。 提交到仓库：
+git commit -m &quot;message&quot; 将暂存区的文件提交到仓库中，提交之后，这个文件就变成了已提交状态，可以理解为这个文件是安全的保存在仓库中，可以提交到远程仓库中。 分支 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yushan-blog.github.io/essay/git/" /><meta property="article:section" content="essay" />
 <meta property="article:published_time" content="2024-07-10T00:00:00+00:00" />
@@ -65,10 +75,15 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
 工作区：是Git仓库压缩出来的一部分，以便用户可以修改这些文件 暂存区：是一个文件，记录需要提交的修改后的文件 Git仓库：是最终的数据库，保存的都是最新的内容 安装和配置 官网：Git下载
 配置
 配置用户名和邮箱，因为在提交代码的时候，需要记录提交者的信息 git config --global user.name &#34;yushan song&#34; git config --global user.email &#34;yushan.song@gmail.com&#34; --global，这个是全局配置，如果只对当前仓库生效，则不需要加
-操作 git add &lt;file&gt; 将文件添加到暂存区，精确的说：‘是将文件添加到下一个版本中’，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。 ">
+基础 仓库：将整个文件夹变为一个仓库进行管理文件
+本地仓库：如果仅仅个人使用，利用Git的优点管理自己的文件，可以将文件夹变为一个仓库，然后自己进行操作 git init 远程仓库：一般用于多人协作开发一个工程，或者自己推送到软件项目托管平台，以供别人访问及使用 git push origin master git clone &lt;url&gt; 本地仓库内文件操作：
+状态：
+git status 可以查看当前仓库的文件状态，比如你修改了什么，新增了什么，删除了什么 添加至暂存区(stage)：
+git add &lt;file&gt;/&lt;path&gt; 将未跟踪的文件进行跟踪，将已跟踪且修改的文件添加到暂存区 将文件添加到暂存区，精确的说：“是将文件添加到下一个版本中”，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。 比如，当出现Untracked files这个信息，就表示有未跟踪文件（新增的），就可以使用这个命令将其添加到暂存区，交由git管理。 提交到仓库：
+git commit -m &#34;message&#34; 将暂存区的文件提交到仓库中，提交之后，这个文件就变成了已提交状态，可以理解为这个文件是安全的保存在仓库中，可以提交到远程仓库中。 分支 ">
   <meta itemprop="datePublished" content="2024-07-10T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-07-10T00:00:00+00:00">
-  <meta itemprop="wordCount" content="44">
+  <meta itemprop="wordCount" content="72">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Git">
   <meta name="twitter:description" content="简介 需求：若是编辑一个文件时，想去保留每次修改的版本，以便当想去回滚版本的时候，也就是这次修改的不行，想要去使用以前的版本，所以，最常见的就是每次修改都另存为一个新文件，这种方法简单，但是繁琐
@@ -83,7 +98,12 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
 工作区：是Git仓库压缩出来的一部分，以便用户可以修改这些文件 暂存区：是一个文件，记录需要提交的修改后的文件 Git仓库：是最终的数据库，保存的都是最新的内容 安装和配置 官网：Git下载
 配置
 配置用户名和邮箱，因为在提交代码的时候，需要记录提交者的信息 git config --global user.name &#34;yushan song&#34; git config --global user.email &#34;yushan.song@gmail.com&#34; --global，这个是全局配置，如果只对当前仓库生效，则不需要加
-操作 git add &lt;file&gt; 将文件添加到暂存区，精确的说：‘是将文件添加到下一个版本中’，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。 ">
+基础 仓库：将整个文件夹变为一个仓库进行管理文件
+本地仓库：如果仅仅个人使用，利用Git的优点管理自己的文件，可以将文件夹变为一个仓库，然后自己进行操作 git init 远程仓库：一般用于多人协作开发一个工程，或者自己推送到软件项目托管平台，以供别人访问及使用 git push origin master git clone &lt;url&gt; 本地仓库内文件操作：
+状态：
+git status 可以查看当前仓库的文件状态，比如你修改了什么，新增了什么，删除了什么 添加至暂存区(stage)：
+git add &lt;file&gt;/&lt;path&gt; 将未跟踪的文件进行跟踪，将已跟踪且修改的文件添加到暂存区 将文件添加到暂存区，精确的说：“是将文件添加到下一个版本中”，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。 比如，当出现Untracked files这个信息，就表示有未跟踪文件（新增的），就可以使用这个命令将其添加到暂存区，交由git管理。 提交到仓库：
+git commit -m &#34;message&#34; 将暂存区的文件提交到仓库中，提交之后，这个文件就变成了已提交状态，可以理解为这个文件是安全的保存在仓库中，可以提交到远程仓库中。 分支 ">
 
     <link rel="preload" href="/css/compiled/main.min.96a47a349c4e73616cdeb7b50ac27fc871a37886f87d13c6cc634d13d579308d.css" as="style" integrity="sha256-lqR6NJxOc2Fs3re1CsJ/yHGjeIb4fRPGzGNNE9V5MI0=" />
     <link href="/css/compiled/main.min.96a47a349c4e73616cdeb7b50ac27fc871a37886f87d13c6cc634d13d579308d.css" rel="stylesheet" integrity="sha256-lqR6NJxOc2Fs3re1CsJ/yHGjeIb4fRPGzGNNE9V5MI0=" />
@@ -430,32 +450,6 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
           <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/pay/"
-    
-  >支付功能
-        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
-    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/pay/wx/"
-    
-  >微信支付
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/pay/alipay/"
-    
-  >支付宝支付
-    </a>
-              
-            </li></ul>
-      </div></li>
-          <li class=""><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/"
     
   >开发框架
@@ -510,6 +504,25 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
             </li><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/devframe/springboot/"
+    
+  >Spring Boot
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a>
+              <div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/devframe/springboot/basic/"
+    
+  >基础知识
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/devframe/mybatis/"
     
   >Mybatis
@@ -529,22 +542,56 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
             </li><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/devframe/springboot/"
+    href="/devframe/schedule/"
     
-  >Spring Boot
+  >定时任务
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
     </a>
               <div class="ltr:hx-pr-0 hx-overflow-hidden">
         <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/devframe/springboot/basic/"
+    href="/devframe/schedule/xxl-job/"
     
-  >基础知识
+  >xxl-job
     </a>
               
             </li></ul>
       </div>
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/devframe/nginx/"
+    
+  >Nginx
+    </a>
+              
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/"
+    
+  >支付功能
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/wx/"
+    
+  >微信支付
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/pay/alipay/"
+    
+  >支付宝支付
+    </a>
+              
             </li></ul>
       </div></li>
           <li class="open"><a
@@ -613,9 +660,15 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
             </li>
           <li>
               <a
-                href="#%e6%93%8d%e4%bd%9c"
+                href="#%e5%9f%ba%e7%a1%80"
                 class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
-              >操作</a>
+              >基础</a>
+            </li>
+          <li>
+              <a
+                href="#%e5%88%86%e6%94%af"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >分支</a>
             </li>
           </ul>
   
@@ -660,6 +713,14 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
     href="/datastruct/stack-queue/"
     
   >栈和队列
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/datastruct/math/"
+    
+  >数学
     </a>
               
             </li></ul>
@@ -717,7 +778,11 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e6%93%8d%e4%bd%9c">操作
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%9f%ba%e7%a1%80">基础
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e5%88%86%e6%94%af">分支
         </a>
       </li></ul>
       <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
@@ -797,12 +862,41 @@ Git由Linus Torvalds开发，用于在linux系统项目中使用。Git是建立�
   
 </div>
 <p><code>--global</code>，这个是全局配置，如果只对当前仓库生效，则不需要加</p>
-<h2>操作<span class="hx-absolute -hx-mt-20" id="操作"></span>
-    <a href="#%e6%93%8d%e4%bd%9c" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ol>
-<li><code>git add &lt;file&gt;</code>
-将文件添加到暂存区，精确的说：‘是将文件添加到下一个版本中’，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。</li>
+<h2>基础<span class="hx-absolute -hx-mt-20" id="基础"></span>
+    <a href="#%e5%9f%ba%e7%a1%80" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>仓库：将整个文件夹变为一个仓库进行管理文件</p>
+<ul>
+<li>本地仓库：如果仅仅个人使用，利用Git的优点管理自己的文件，可以将文件夹变为一个仓库，然后自己进行操作
+<ul>
+<li><code>git init</code></li>
+</ul>
+</li>
+<li>远程仓库：一般用于多人协作开发一个工程，或者自己推送到软件项目托管平台，以供别人访问及使用
+<ul>
+<li><code>git push origin master</code></li>
+<li><code>git clone &lt;url&gt;</code></li>
+</ul>
+</li>
+</ul>
+<p>本地仓库内文件操作：</p>
+<p>状态：</p>
+<ol>
+<li><code>git status</code></li>
+<li>可以查看当前仓库的文件状态，比如你修改了什么，新增了什么，删除了什么</li>
 </ol>
-
+<p>添加至暂存区(stage)：</p>
+<ol>
+<li><code>git add &lt;file&gt;/&lt;path&gt;</code></li>
+<li>将未跟踪的文件进行跟踪，将已跟踪且修改的文件添加到暂存区</li>
+<li>将文件添加到暂存区，精确的说：“是将文件添加到下一个版本中”，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。</li>
+<li>比如，当出现<code>Untracked files</code>这个信息，就表示有未跟踪文件（新增的），就可以使用这个命令将其添加到暂存区，交由git管理。</li>
+</ol>
+<p>提交到仓库：</p>
+<ol>
+<li><code>git commit -m &quot;message&quot;</code></li>
+<li>将暂存区的文件提交到仓库中，提交之后，这个文件就变成了<code>已提交状态</code>，可以理解为这个文件是安全的保存在仓库中，可以提交到远程仓库中。</li>
+</ol>
+<h2>分支<span class="hx-absolute -hx-mt-20" id="分支"></span>
+    <a href="#%e5%88%86%e6%94%af" class="subheading-anchor" aria-label="Permalink for this section"></a></h2>
         </div>
         <div class="hx-mt-16"></div>
         

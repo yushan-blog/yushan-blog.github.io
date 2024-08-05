@@ -5,7 +5,7 @@
     <description>Recent content on 雨山-Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jul 2024 12:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jul 2024 12:00:00 +0800</lastBuildDate>
     
 	  <atom:link href="https://yushan-blog.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -251,12 +251,41 @@
   
 &lt;/div&gt;
 &lt;p&gt;&lt;code&gt;--global&lt;/code&gt;，这个是全局配置，如果只对当前仓库生效，则不需要加&lt;/p&gt;
-&lt;h2&gt;操作&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;操作&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#%e6%93%8d%e4%bd%9c&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;git add &amp;lt;file&amp;gt;&lt;/code&gt;
-将文件添加到暂存区，精确的说：‘是将文件添加到下一个版本中’，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。&lt;/li&gt;
+&lt;h2&gt;基础&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;基础&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%9f%ba%e7%a1%80&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;仓库：将整个文件夹变为一个仓库进行管理文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本地仓库：如果仅仅个人使用，利用Git的优点管理自己的文件，可以将文件夹变为一个仓库，然后自己进行操作
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;git init&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;远程仓库：一般用于多人协作开发一个工程，或者自己推送到软件项目托管平台，以供别人访问及使用
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git clone &amp;lt;url&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本地仓库内文件操作：&lt;/p&gt;
+&lt;p&gt;状态：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;git status&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;可以查看当前仓库的文件状态，比如你修改了什么，新增了什么，删除了什么&lt;/li&gt;
 &lt;/ol&gt;
-
+&lt;p&gt;添加至暂存区(stage)：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;git add &amp;lt;file&amp;gt;/&amp;lt;path&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将未跟踪的文件进行跟踪，将已跟踪且修改的文件添加到暂存区&lt;/li&gt;
+&lt;li&gt;将文件添加到暂存区，精确的说：“是将文件添加到下一个版本中”，每次add都是创建一个新版本，但是暂存区中只有一个版本，所以每次add都是覆盖之前的版本。&lt;/li&gt;
+&lt;li&gt;比如，当出现&lt;code&gt;Untracked files&lt;/code&gt;这个信息，就表示有未跟踪文件（新增的），就可以使用这个命令将其添加到暂存区，交由git管理。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;提交到仓库：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;git commit -m &amp;quot;message&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将暂存区的文件提交到仓库中，提交之后，这个文件就变成了&lt;code&gt;已提交状态&lt;/code&gt;，可以理解为这个文件是安全的保存在仓库中，可以提交到远程仓库中。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;分支&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;分支&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%88%86%e6%94%af&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;
       </description>
     </item>
     
